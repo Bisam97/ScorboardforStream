@@ -1,0 +1,16 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,54.8571,54.8571)
+  { ColumnView1 ColumnView
+    MoveScaled(0,13.7143,54.8571,32.5714)
+  }
+  { Button1 Button
+    MoveScaled(20.5714,48.8571,13.7143,3.4286)
+    Text = ("Refreash")
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(13.7143,8.5714,26.5714,3.4286)
+    Text = ("Choose the Module for Activation")
+  }
+}

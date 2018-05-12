@@ -1,0 +1,107 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: StreamScoreboardToolBasic 3.11.1\n"
+"PO-Revision-Date: 2018-05-12 13:52 UTC\n"
+"Last-Translator: Bisam97 <Bisam97@Tobias-PC>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1
+msgid "Scoreboard Tool for Stream"
+msgstr "-"
+
+#: FMain.form:18
+msgid "Choose a Option"
+msgstr "-"
+
+#: FMain.form:22
+msgid "ActivateModule"
+msgstr "Activ Module"
+
+#: FMain.form:27
+msgid "Preset Settings"
+msgstr "-"
+
+#: FMain.form:31
+msgid "New Preset"
+msgstr "-"
+
+#: FMain.form:36
+msgid "Edit Preset"
+msgstr "-"
+
+#: FMain.form:42
+msgid "Choose Preset"
+msgstr "-"
+
+#: FMain.form:47
+msgid "Image Settings"
+msgstr "-"
+
+#: FMain.form:53
+msgid "Key settings"
+msgstr "-"
+
+#: FModule.form:17
+msgid "Refreash"
+msgstr "Refresh"
+
+#: FModule.form:22
+msgid "Choose the Module for Activation"
+msgstr "-"
+
+#: FimgSetting.form:20
+msgid "Size"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "1080p (1920x1080)"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "480p (640x480)"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "720p (1280x720)"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "Custom"
+msgstr "-"
+
+#: FimgSetting.form:30
+msgid "Width"
+msgstr "-"
+
+#: FimgSetting.form:35
+msgid "Height"
+msgstr "-"
+
+#: FimgSetting.form:50
+msgid "BMP"
+msgstr "-"
+
+#: FimgSetting.form:50
+msgid "JPG"
+msgstr "-"
+
+#: FimgSetting.form:50
+msgid "PNG"
+msgstr "-"
+
+#: FimgSetting.form:55
+msgid "Choose the Data Type"
+msgstr "-"
+
+#: FimgSetting.form:60
+msgid "Save"
+msgstr "-"
+
+#: FimgSetting.form:65
+msgid "Chancel"
+msgstr "Cancel"
+

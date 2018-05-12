@@ -1,0 +1,38 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,43,27)
+  { FStart Frame
+    MoveScaled(0.8571,0.8571,41,25)
+    Text = ("Choose a Option")
+    { Button1 Button
+      MoveScaled(23,7,16,4)
+      Text = ("ActivateModule")
+    }
+    { Frame1 Frame
+      MoveScaled(2,4,20,19)
+      Text = ("Preset Settings")
+      { Button3 Button
+        MoveScaled(2,8,16,4)
+        Text = ("New Preset")
+      }
+      { Button4 Button
+        MoveScaled(2,13,16,4)
+        Text = ("Edit Preset")
+      }
+    }
+    { Button2 Button
+      MoveScaled(4,7,16,4)
+      Text = ("Choose Preset")
+    }
+    { Button5 Button
+      MoveScaled(23,12,16,4)
+      Text = ("Image Settings")
+    }
+    { Button6 Button
+      MoveScaled(23,17,16,4)
+      Enabled = False
+      Text = ("Key settings")
+    }
+  }
+}

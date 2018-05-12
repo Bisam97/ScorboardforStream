@@ -1,0 +1,43 @@
+' Gambas class file
+
+
+Public Sub ComboBox1_Click()
+
+  Debug ComboBox1.Current.Text
+  If ComboBox1.Current.Text == "Custom" Then
+  Else If ComboBox1.Current.Text == "1080p (1920x1080)" Then
+    WidthBox.Value = 1920
+    HeightBox.Value = 1080
+  Else If ComboBox1.Current.Text == "720p (1280x720)" Then
+    WidthBox.Value = 1280
+    HeightBox.Value = 720
+  Else If ComboBox1.Current.Text == "480p (640x480)" Then
+    WidthBox.Value = 640
+    HeightBox.Value = 480
+  Endif
+
+End
+
+Public Sub Form_Open()
+
+  Dim s As String[]
+
+  s = Split(File.Load(User.Home & "/.Scoreboard/img.setting"), "|")
+  WidthBox.Value = s[0]
+  HeightBox.Value = s[1]
+  ComboBox1.Text = s[2]
+
+End
+
+Public Sub Button1_Click()
+
+  File.Save(User.Home & "/.Scoreboard/img.setting", WidthBox.Value & "|" & HeightBox.Value & "|" & ComboBox2.Current.Text)
+  Me.Close
+
+End
+
+Public Sub Button2_Click()
+
+  Me.Close
+
+End
