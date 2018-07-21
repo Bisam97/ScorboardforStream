@@ -22,39 +22,48 @@ Public Sub _new(Author As String, Version As Integer, ModName As String, ModuleI
 
 End
 
-
-Public Sub ModLoad(ImputString As String) As Modul ''Please enter the ImputString so: Author|ModName|Version|ModuleID|[RequireModule]
-
-
-
-End
-
 Private Function Author_Read() As String
-
-
 
 End
 
 Private Function Version_Read() As Integer
 
-
-
 End
 
 Private Function Name_Read() As String
-
-
 
 End
 
 Private Function Require_Read() As String[]
 
-
-
 End
 
 Private Function ModuleID_Read() As String
 
+End
 
+Static Public Function loadModule(Path As String) As Modul
+
+  Dim xml As XmlDocument
+  Dim x As XmlElement
+  Dim Author As String
+  Dim Version As Integer
+  Dim Name As String
+  Dim ModuleID As String
+  Dim Require As New String[]
+
+  ''Load Module.ini
+  xml = New XmlDocument(Path & "/module.ini")
+
+  x = xml.GetElementsByNamespace("Ini")[0].ChildElements[0]
+
+  Author = x.Attributes["Author"]
+  Version = x.Attributes["Version"]
+  Name = x.Attributes["Name"]
+  ModuleID = x.Attributes["ModuleID"]
+
+  For Each x In Xml.GetElementsByNamespace("Require")[0].ChildElements
+    Require.Add(x.Attributes("Require"))
+  Next
 
 End

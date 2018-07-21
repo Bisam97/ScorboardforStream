@@ -1,0 +1,7 @@
+' Gambas class file
+
+Public Sub Button1_Click()
+  
+  FPresetSetup.TxtFont.Text = FontChooser1.Value 
+  
+End

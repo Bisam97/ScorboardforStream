@@ -5,6 +5,8 @@ Scoreboard Tool for Stream
 0.0.1
 
 gb.image
-gb.gui
+gb.qt4
 gb.form
+gb.xml
+gb.xml.html
 

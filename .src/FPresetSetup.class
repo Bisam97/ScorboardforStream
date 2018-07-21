@@ -1,0 +1,314 @@
+' Gambas class file
+
+ModuleName As String
+
+Public FIn As Form
+Public BtPC As Button
+Public Btok As Button
+Public TxtP As TextBox
+Public TxtX As TextBox 
+Public TxtY As TextBox
+Public TxtFont As ButtonBox
+
+Public Sub Form_Open()
+  
+  GridView1.Header = GridView.Horizontal
+  GridView1.AddColumn("Images Name")
+  GridView1.AddColumn("Images")
+  GridView1.AddColumn("x")
+  GridView1.AddColumn("y")
+  
+  GridView2.Header = GridView.Horizontal
+  GridView2.AddColumn("Description")
+  GridView2.AddColumn("x")
+  GridView2.AddColumn("y")
+  GridView2.AddColumn("Font")
+  
+  GridView1.Mode = Select.Single
+  GridView2.Mode = Select.Single
+  
+End
+
+Public Sub AddImages(Path As String, x As Float, y As Float)
+  
+  GridView1.Rows.Insert(0)
+  GridView1[0, 0].Text = Split(Path, "/", "", True)[Split(Path, "/", "", True).Length - 1]
+  GridView1[0, 1].Picture = Picture.Load(Path)
+  GridView1[0, 2].Text = x
+  GridView1[0, 3].Text = y
+  
+End
+
+Public Sub btn1_Click()
+  
+  FIn = New Form(Me)
+  FIn.w = 500
+  FIn.h = 300
+  FIn.y = btn1.y - 5
+  btn1.x += 3
+  FIn.Border = True
+  FIn.Show()
+  BtPC = New Button(FIn) As "Chooser"
+  TxtP = New TextBox(FIn)
+  TxtX = New TextBox(FIn)
+  TxtY = New TextBox(FIn)
+  Btok = New Button(FIn) As "OK"
+  
+  With TxtP
+    .x = 5
+    .y = 5
+    .H = 28
+    .w = 112
+    .Tooltip = "Path to Image"
+  End With
+  With TxtX
+    .x = 5 + TxtP.x + 112
+    .y = 5
+    .H = 28
+    .w = 112
+    .Tooltip = "X Codinate of the Image"
+  End With
+  With TxtY
+    .x = 5 + TxtX.x + 112
+    .y = 5 
+    .H = 28
+    .w = 112
+    .Tooltip = "Y Codinate of the Image"
+  End With
+  With BtPC
+    .x = 5
+    .y = 38
+    .H = 28
+    .w = 112
+    .Text = "Path to Image"
+  End With
+  With Btok
+    .x = 5 + 112 + 5
+    .y = 38
+    .H = 28
+    .w = 112
+    .Text = "Insert"
+  End With
+  TxtP.SetFocus()
+  
+End
+
+Public Sub Chooser_Click()
+  
+  Dialog.Title = "Wähle das Blid"
+  Dialog.OpenFile()
+  TxtP.Text = Dialog.Path
+  
+End
+
+Public Sub OK_Click()
+  
+  AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text))
+  FIn.Close()
+  
+End
+
+Public Sub btn2_Click()
+  
+  FIn = New Form(Me)
+  FIn.w = 500
+  FIn.h = 300
+  FIn.y = btn2.y - 5
+  btn1.x += 3
+  FIn.Border = True
+  FIn.Show()
+  
+  TxtP = New TextBox(FIn)
+  TxtX = New TextBox(FIn)
+  TxtY = New TextBox(FIn)
+  Btok = New Button(FIn) As "OK1"
+  TxtFont = New ButtonBox(FIn) As "FontC"
+  
+  With TxtP
+    .x = 5
+    .y = 5
+    .H = 28
+    .w = 112
+    .Tooltip = "Text Description"
+  End With
+  With TxtX
+    .x = 5 + TxtP.x + 112
+    .y = 5
+    .H = 28
+    .w = 112
+    .Tooltip = "X Codinate of the Text"
+  End With
+  With TxtY
+    .x = 5 + TxtX.x + 112
+    .y = 5 
+    .H = 28
+    .w = 112
+    .Tooltip = "Y Codinate of the Text"
+  End With
+  
+  With TxtFont
+    .x = 5 
+    .y = 38 
+    .H = 28
+    .w = 112
+    .Tooltip = "Font of the Text"
+  End With
+  With Btok
+    .x = 5 + 112 + 5
+    .y = 38
+    .H = 28
+    .w = 112
+    .Text = "Insert"
+  End With
+  TxtP.SetFocus()
+  
+End
+
+Public Sub OK1_Click()
+  
+  addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text)
+  FIn.Close()
+  
+End
+
+Public Sub addText(Description As String, x As Float, y As Float, Font As String)
+  
+  GridView2.Rows.Insert(0)
+  GridView2[0, 0].Text = Description
+  GridView2[0, 1].Text = x
+  GridView2[0, 2].Text = y
+  GridView2[0, 3].Text = Font
+  
+End
+
+Public Sub btn3_Click()
+  
+  Dim call As XmlDocument
+  Dim Element As XmlElement
+  Dim sIGV As XmlElement[]
+  Dim s As XmlElement
+  Dim sTGV As XmlElement[]
+  
+  If Not Exist(User.Home & "/Output") Then Mkdir User.home & "/Output"
+  If Not Exist(User.home & "/Output/" & ModuleName) Then Mkdir User.home & "/Output/" & ModuleName
+  
+  call = New XmlDocument
+  sIGV = readOutImageGredView()
+  
+  For Each s In sIGV
+    
+    call.Root.AppendChild(s)
+    
+  Next
+  sTGV = readOutTextGredView()
+  For Each s In sTGV
+    
+    call.Root.AppendChild(s)
+    
+  Next
+  
+  Print call.Content
+  call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")  
+  
+End
+
+Public Sub readOutTextGredView() As XmlElement[]
+  
+  Dim s As XmlElement[]
+  Dim t As New XmlElement
+  
+  s = New XmlElement[]
+  
+  While GridView2.Rows.Count > 0
+    
+    t.SetAttribute("Description", GridView2[0, 0].Text)
+    t.SetAttribute("X", GridView2[0, 1].Text)
+    t.SetAttribute("Y", GridView2[0, 2].Text)
+    t.SetAttribute("Font", GridView2[0, 3].Text)
+    t.TagName = "Text"
+    s.Add(t)
+    GridView2.Rows.Remove(0)
+    t = New XmlElement
+  Wend
+  Return s
+  
+End
+
+Public Sub readOutImageGredView() As XmlElement[]
+  
+  Dim s As XmlElement[]
+  Dim hpic As New Picture
+  Dim t As New XmlElement
+  
+  If Not Exist(User.Home & "/Output") Then Mkdir User.home & "/Output"
+  If Not Exist(User.home & "/Output/" & ModuleName) Then Mkdir User.home & "/Output/" & ModuleName
+  s = New XmlElement[]
+  
+  While GridView1.Rows.Count > 0
+    
+    t.TagName = "Images"
+    t.SetAttribute("IMGPath", GridView1[0, 0].Text)
+    t.SetAttribute("X", GridView1[0, 2].Text)
+    t.SetAttribute("Y", GridView1[0, 3].Text)
+    
+    hpic = GridView1[0, 1].Picture
+    hpic.Save(User.Home & "/Output/" & ModuleName & "/" & GridView1[0, 0].Text, 100)
+    GridView1.Rows.Remove(0)
+    s.Add(t)
+    t = New XmlElement
+  Wend
+  Return s
+  
+End
+
+Public Sub TextBox1_KeyRelease()
+  
+  ModuleName = TextBox1.text
+  
+End
+
+Public Sub Button3_Click()
+  
+  btn3_Click()
+  loadModule(User.home & "/Output/" & ModuleName)
+  
+End
+
+Public Sub loadModule(pathtoModule As String)
+  
+  Dim s As XmlElement
+  
+  Dim doc As New XmlDocument(pathtoModule & "/ModuleCall.xml")
+  
+  For Each s In doc.GetElementsByTagName("Images")
+    GridView1.Rows.Insert(0)
+    GridView1[0, 0].Text = s.GetAttribute("IMGPath")
+    GridView1[0, 1].Picture = Picture.Load(pathtoModule & "/" & s.GetAttribute("IMGPath"))
+    GridView1[0, 2].Text = s.GetAttribute("X")
+    GridView1[0, 3].Text = s.GetAttribute("Y")
+    
+  Next
+  
+  For Each s In doc.GetElementsByTagName("Text")
+    GridView2.Rows.Insert(0)
+    GridView2[0, 0].Text = s.GetAttribute("Description")
+    GridView2[0, 1].Text = s.GetAttribute("X")
+    GridView2[0, 2].Text = s.GetAttribute("Y")
+    GridView2[0, 3].Text = s.GetAttribute("Font")
+    
+  Next
+  
+End
+
+Public Sub Button2_Click()
+  
+  loadModule(User.home & "/Output/" & ModuleName)
+  FScoarboard.loadModule(User.home & "/Output/" & ModuleName)
+  
+End
+
+Public Sub FontC_Click()
+  
+  FFont.Show()
+  
+End

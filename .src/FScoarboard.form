@@ -1,0 +1,13 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,71)
+  Arrangement = Arrange.Vertical
+  { Button1 Button
+    MoveScaled(24,0.5714,16,4)
+  }
+  { ScrollArea1 ScrollArea
+    MoveScaled(0,5.2857,64,65)
+    Expand = True
+  }
+}
