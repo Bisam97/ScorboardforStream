@@ -16,6 +16,7 @@ Public Sub loadModule(PathToModule As String)
   
   Dim doc As New XmlDocument(pathtoModule & "/ModuleCall.xml")
   
+  hPic = New Picture(3840, 2160, True)
   Paint.Begin(hPic)
   For Each s In doc.GetElementsByTagName("Images")
     

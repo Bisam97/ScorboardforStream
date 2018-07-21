@@ -302,6 +302,11 @@ End
 
 Public Sub Button2_Click()
   
+  GridView1.Clear()
+  GridView2.Clear()
+  GridView1.Rows.Count = 0
+  GridView2.Rows.Count = 0
+  
   loadModule(User.home & "/Output/" & ModuleName)
   FScoarboard.loadModule(User.home & "/Output/" & ModuleName)
   
