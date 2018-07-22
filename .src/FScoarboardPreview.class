@@ -15,8 +15,11 @@ Public Sub loadModule(PathToModule As String)
   Dim s As XmlElement
   
   Dim doc As New XmlDocument(pathtoModule & "/ModuleCall.xml")
+  Dim StringSplit As String[]
   
-  hPic = New Picture(3840, 2160, True)
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+  
+  hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   Paint.Begin(hPic)
   For Each s In doc.GetElementsByTagName("Images")
     
@@ -36,7 +39,11 @@ End
 
 Public Sub Form_Open()
   
-  hPic = New Picture(3840, 2160, True)
+  Dim StringSplit As String[]
+  
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+  
+  hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   
   ScrollArea1.ResizeContents(hPic.w, hPic.h)
   
@@ -114,9 +121,13 @@ Public Sub makeFinishOverlay(pathToImagesXml As String, pathToTextXml As String,
   Dim txt As XmlDocument
   Dim images As XmlDocument
   Dim Element As XmlElement
+  Dim StringSplit As String[]
   
   txt = New XmlDocument(pathToTextXml)
   images = New XmlDocument(pathToImagesXml)
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+  
+  hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   
   For Each Element In images.GetElementsByTagName("Images")
     Paint.Begin(hpic)

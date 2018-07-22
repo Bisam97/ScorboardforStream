@@ -10,7 +10,7 @@
     Text = ("Refreash")
   }
   { TextLabel1 TextLabel
-    MoveScaled(13.7143,8.5714,26.5714,3.4286)
+    MoveScaled(14,8,27,4)
     Text = ("Choose the Module for Activation")
   }
 }

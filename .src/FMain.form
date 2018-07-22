@@ -19,7 +19,6 @@
     }
     { Button5 Button
       MoveScaled(23,14,16,4)
-      Enabled = False
       Text = ("Image Settings")
     }
     { Button6 Button
