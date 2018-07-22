@@ -23,10 +23,7 @@ End
 
 Public Sub Button2_Click()
   
-  Dialog.Filter = ["*.preset", "Scoarboard Preset"]
-  Dialog.Path = User.Home & "/.Scoreboard/CostumPresets/"
-  If Dialog.OpenFile() Then Return
-  p = Preset.loadPreset(Dialog.Path)
+  FScoreboard.Show()
   
 End
 
@@ -38,9 +35,9 @@ End
 
 Public Sub Button3_Click()
   
-  FScoarboard.Show()
+  FScoarboardPreview.Show()
   FPresetSetup.Show()
-  FScoarboard.x = FPresetSetup.x + FPresetSetup.Width
+  FScoarboardPreview.x = FPresetSetup.x + FPresetSetup.Width
   
 End
 

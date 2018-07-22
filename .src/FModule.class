@@ -1,40 +1,46 @@
 ' Gambas class file
 
-
 Public Sub Form_Open()
-
+  
   Dim f As String
   Dim i As Integer = 0
-
+  
   Mdir()
   For Each F In Dir("/usr/lib/Scoarbord/module/", "*")
     Debug i
     ColumnView1.Add(i, f, Picture.Load("off.png"))
-
+    
+    i += 1
+    Debug F
+  Next
+  For Each F In Dir(User.home & "/.local/lib/scoreboard/module/", "*")
+    Debug i
+    ColumnView1.Add(i, f, Picture.Load("off.png"))
+    
     i += 1
     Debug F
   Next
   LoadBox()
-
+  
 End
 
 Public Sub ColumnView1_DblClick()
-
+  
   Debug ColumnView1.Current.Picture.H
   If ColumnView1.Current.Picture.h == 16 Then
-
+    
     ColumnView1.Current.Picture = Picture.Load("on.png")
-
+    
   Else
-
+    
     ColumnView1.Current.Picture = Picture.Load("off.png")
-
+    
   Endif
-
+  
 End
 
 Public Sub Button1_Click()
-
+  
   If ColumnView1.Count > 0 Then
     Debug ColumnView1[0].Text,
       Debug ColumnView1[0].Picture.h == 15
@@ -45,54 +51,57 @@ Public Sub Button1_Click()
     Message.Title = "No Module Found"
     Message.Warning("Achtung es wurden keine Module gefunden!!\nWenn das nach einen Neustart des Progammes immernoch so ist dann installieren\nsie das Programm nochmal neu.\nIm normal fall sollte immer das Modul 'Basic' Enthalten sein.", "Ok")
   Endif
-
+  
 End
 
 Public Sub Save()
-
+  
   Dim i As Integer = 0
   Dim s As String
   Dim bo As Boolean
   Dim save As String
-
+  
   While True
     s = ColumnView1[i].Text
     bo = ColumnView1[i].Picture.h == 15
     save = save & s & "/" & Str(bo) & "|"
     i += 1
   Wend
-
+  
 Catch
   Debug Error.Text
   File.Save(User.Home & "/.Scoreboard/Config.module", save)
-
+  
 End
 
 Public Sub Mdir()
-
+  
   If Not Exist("/usr/lib/Scoarbord") Then Mkdir "/usr/lib/Scoarbord"
   If Not Exist("/usr/lib/Scoarbord/module") Then Mkdir "/usr/lib/Scoarbord/module"
-
+  If Not Exist(User.Home & "/.local/lib") Then Mkdir user.home & "/.local/lib"
+  If Not Exist(User.Home & "/.local/lib/scoreboard") Then Mkdir user.home & "/.local/lib/scoreboard"
+  If Not Exist(User.Home & "/.local/lib/scoreboard/module") Then Mkdir user.home & "/.local/lib/scoreboard/module"
+  
 End
 
 Public Sub Form_Close()
-
+  
   Save()
-
+  
 End
 
 Public Sub LoadBox()
-
+  
   Dim s As String
   Dim Cofig As String[]
   Dim i As Integer
   Dim temp1 As _TreeView_Item
   Dim temp2 As String
   Dim temp3 As Boolean
-
+  
   s = File.Load(User.Home & "/.Scoreboard/Config.module")
   Cofig = Split(s, "|/", "", True)
-
+  
   While True
     i = 0
     If Cofig.Length == 0 Then Break
@@ -100,33 +109,35 @@ Public Sub LoadBox()
     temp3 = Val(Cofig[1])
     Cofig.Delete(0, 2)
     While True
-
+      
       Try temp1 = ColumnView1[i]
       If Error Then Break
-
+      
       If ColumnView1[i].Text == temp2 Then
-
+        
         If temp3 Then
-
+          
           ColumnView1[i].Picture = Picture.Load("on.png")
-
+          
           Break
-
+          
         Endif
-
+        
         Break
-
+        
       Else
-
+        
         i += 1
-
+        
       Endif
-
+      
     Wend
     If Cofig.Length == 0 Then Break
-
+    
   Wend
-
-
+  
 End
 
+Public Sub ColumnView1_Click()
+  
+End

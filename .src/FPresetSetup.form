@@ -18,7 +18,7 @@
   }
   { Button1 Button
     MoveScaled(2,57,16,4)
-    Text = ("Cancel")
+    Text = ("Save and\nInstall Module")
   }
   { btn3 Button
     MoveScaled(36,57,16,4)

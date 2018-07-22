@@ -1,0 +1,50 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  { TournamentRound TextBox
+    MoveScaled(1,35,24,4)
+  }
+  { Tournament TextBox
+    MoveScaled(1,40,24,4)
+  }
+  { Label1 Label
+    MoveScaled(2,31,24,4)
+    Text = ("Basic Module Settings")
+  }
+  { TRX TextBox
+    MoveScaled(26,35,9,4)
+  }
+  { TRY TextBox
+    MoveScaled(36,35,9,4)
+  }
+  { TX TextBox
+    MoveScaled(26,40,9,4)
+  }
+  { TY TextBox
+    MoveScaled(36,40,9,4)
+  }
+  { Button1 Button
+    MoveScaled(23,56,18,4)
+    Text = ("Picture Aktualisiren")
+  }
+  { Label2 Label
+    MoveScaled(46,35,24,4)
+    Text = ("Round | X | Y")
+  }
+  { Label3 Label
+    MoveScaled(46,40,24,4)
+    Text = ("Tournament | X | Y")
+  }
+  { Label4 Label
+    MoveScaled(16,1,24,4)
+    Text = ("Module Text Insert")
+  }
+  { ButtonBox1 ButtonBox
+    MoveScaled(20,51,24,4)
+  }
+  { Label5 Label
+    MoveScaled(20,46,24,4)
+    Text = ("Save Path of the Picture")
+  }
+}

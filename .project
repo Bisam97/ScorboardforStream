@@ -1,7 +1,7 @@
 # Gambas Project File 3.0
 Title=Scoreboard Tool for Stream
 Startup=FMain
-Version=0.0.1
+Version=0.5.1
 Component=gb.image
 Component=gb.qt4
 Component=gb.form

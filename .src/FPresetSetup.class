@@ -308,12 +308,26 @@ Public Sub Button2_Click()
   GridView2.Rows.Count = 0
   
   loadModule(User.home & "/Output/" & ModuleName)
-  FScoarboard.loadModule(User.home & "/Output/" & ModuleName)
+  FScoarboardPreview.loadModule(User.home & "/Output/" & ModuleName)
   
 End
 
 Public Sub FontC_Click()
   
   FFont.Show()
+  
+End
+
+Public Sub Form_Close()
+  
+  FScoarboardPreview.Close()
+  
+End
+
+Public Sub Button1_Click()
+  
+  Button3_Click()
+  Shell "cp --recursive " & User.Home & "/Output/" & TextBox1.Text & " " & User.home & "/.local/lib/scoreboard/module/"
+  Message.Info("Modul '" & TextBox1.Text & "' was successfully installed")
   
 End
