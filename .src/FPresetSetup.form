@@ -4,6 +4,7 @@
   MoveScaled(0,0,64,64)
   { GridView1 GridView
     MoveScaled(2,5,50,16)
+    ShowCursor = True
   }
   { btn1 Button
     MoveScaled(17,22,16,4)

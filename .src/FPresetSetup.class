@@ -103,8 +103,22 @@ End
 
 Public Sub OK_Click()
   
-  AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text))
-  FIn.Close()
+  If TxtP.Text
+    AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text))
+    
+    FIn.Close()
+  Else
+    Message.Info("Please Insert a Path to a Image")
+    TxtP.Background = Color.Red
+  Endif
+Catch
+  If Error.Code == 6 Then
+    Message.Error("Please Enter a Integer in the red box.")
+    TxtX.Background = Color.Red
+    TxtY.Background = Color.Red
+  Endif
+  Print Error.Text
+  Print Error.Where
   
 End
 
@@ -166,8 +180,21 @@ End
 
 Public Sub OK1_Click()
   
-  addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text)
-  FIn.Close()
+  If TxtP.text
+    addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text)
+    FIn.Close()
+  Else
+    Message.Info("Please Insert a Path to a Image")
+    TxtP.Background = Color.Red
+  Endif
+Catch
+  If Error.Code == 6 Then
+    Message.Error("Please Enter a Integer in the red box.")
+    TxtX.Background = Color.Red
+    TxtY.Background = Color.Red
+  Endif
+  Print Error.Text
+  Print Error.Where
   
 End
 
@@ -195,20 +222,24 @@ Public Sub btn3_Click()
   call = New XmlDocument
   sIGV = readOutImageGredView()
   
-  For Each s In sIGV
+  If ModuleName Then
+    For Each s In sIGV
+      
+      call.Root.AppendChild(s)
+      
+    Next
+    sTGV = readOutTextGredView()
+    For Each s In sTGV
+      
+      call.Root.AppendChild(s)
+      
+    Next
     
-    call.Root.AppendChild(s)
-    
-  Next
-  sTGV = readOutTextGredView()
-  For Each s In sTGV
-    
-    call.Root.AppendChild(s)
-    
-  Next
-  
-  Print call.Content
-  call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")  
+    Print call.Content
+    call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")  
+  Else
+    Message.Info("Please Enter a Modulename")
+  Endif
   
 End
 
@@ -269,9 +300,13 @@ End
 
 Public Sub Button3_Click()
   
-  btn3_Click()
-  loadModule(User.home & "/Output/" & ModuleName)
-  
+  If TextBox1.Text Then
+    btn3_Click()
+    loadModule(User.home & "/Output/" & ModuleName)
+  Else
+    Message.Info("Please Enter a Modulename")
+  Endif
+
 End
 
 Public Sub loadModule(pathtoModule As String)
@@ -309,6 +344,11 @@ Public Sub Button2_Click()
   
   loadModule(User.home & "/Output/" & ModuleName)
   FScoarboardPreview.loadModule(User.home & "/Output/" & ModuleName)
+Catch
+  If Error.code = -1 Then
+    Message.Error("Modul can't found")
+  Endif
+  Print Error.text
   
 End
 
@@ -326,8 +366,34 @@ End
 
 Public Sub Button1_Click()
   
-  Button3_Click()
-  Shell "cp --recursive " & User.Home & "/Output/" & TextBox1.Text & " " & User.home & "/.local/lib/scoreboard/module/"
-  Message.Info("Modul '" & TextBox1.Text & "' was successfully installed")
+  If TextBox1.text
+    Button3_Click()
+    Shell "cp --recursive " & User.Home & "/Output/" & TextBox1.Text & " " & User.home & "/.local/lib/scoreboard/module/"
+    Message.Info("Modul '" & TextBox1.Text & "' was successfully installed")
+  Else
+    Message.Info("Please Enter a Modulename")
+  Endif
+  
+End
+
+Public Sub GridView1_KeyPress()
+  
+  If Key.code = Key.Del Then 
+    Try GridView1.Rows.Remove((GridView1.Current.y + 21) / 21 - 1)
+  Endif
+  
+End
+
+Public Sub GridView2_KeyPress()
+  
+  If Key.code = Key.Del Then 
+    Try GridView2.Rows.Remove((GridView2.Current.y + 21) / 21 - 1)
+    If Error Then
+      Print Error.Backtrace
+      Print Error.Text
+      Print Error.Code
+      Print Error.where
+    Endif
+  Endif
   
 End

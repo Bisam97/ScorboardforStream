@@ -1,18 +1,19 @@
 # Gambas Project File 3.0
 Title=Scoreboard Tool for Stream
 Startup=FMain
-Version=0.5.1
+Version=0.6.1
 Component=gb.image
 Component=gb.qt4
 Component=gb.form
 Component=gb.xml
 Component=gb.xml.html
+Description="A Scorboard Tool for FG Streams"
 TabSize=2
 Language=en_US
 Maintainer=bisam97
 Address=bisam97@bisam97.de
 License=General Public License
-PackageName=streamscoreboardtoolbasic-0.5.1
+PackageName=streamscoreboardtoolbasic-0.6.1
 Packager=1
 Systems=autotools,ubuntu
 Menus=ubuntu:"Games/Tools"

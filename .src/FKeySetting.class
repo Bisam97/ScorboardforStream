@@ -1,0 +1,5 @@
+' Gambas class file
+
+Public Sub Panel1_MouseDown()
+  
+End

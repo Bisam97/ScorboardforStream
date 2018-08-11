@@ -14,6 +14,10 @@ Public Sub Button1_Click()
   SetXML()
   Print "test"
   FScoarboardPreview.makeFinishOverlay("/tmp/Images.xml", "/tmp/Text.xml", ButtonBox1.text)
+Catch
+  If Error.code = 6 Or Error.code = -1 Then
+    Message.Error("Please Check the Input\nand down't forget the inputs of the round of the game.")
+  Endif
   
 End
 

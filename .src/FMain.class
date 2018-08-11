@@ -11,7 +11,6 @@ End
 Public Sub mDir()
   
   If Not Exist(User.Home & "/.Scoreboard") Then Mkdir User.Home & "/.Scoreboard"
-  If Not Exist(User.Home & "/.Scoreboard/CostumPresets") Then Mkdir User.Home & "/.Scoreboard/CostumPresets"
   
 End
 
@@ -42,5 +41,19 @@ Public Sub Button3_Click()
 End
 
 Public Sub Form_Close()
+  
+End
+
+Public Sub getModul_Click()
+  
+  If Message.Question("You will now be connected to bisam97.de and a list of modules for insterlation will be displayed", "cancel", "ok") = 2 Then
+    
+  Endif
+  
+End
+
+Public Sub Button6_Click()
+  
+  FKeysetting.Show()
   
 End

@@ -1,0 +1,26 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  { Panel1 Panel
+    MoveScaled(1,0,63,64)
+    { TextBox1 TextBox
+      MoveScaled(22,5,6,4)
+    }
+    { Label1 Label
+      MoveScaled(1,5,24,4)
+      Text = ("Add a new Image")
+    }
+    { Label2 Label
+      MoveScaled(9,1,24,4)
+      Text = ("Editor Settings")
+    }
+    { Label3 Label
+      MoveScaled(1,11,24,4)
+      Text = ("Add a new Text")
+    }
+    { TextBox2 TextBox
+      MoveScaled(22,11,6,4)
+    }
+  }
+}

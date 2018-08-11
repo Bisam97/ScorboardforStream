@@ -31,8 +31,12 @@ End
 
 Public Sub Button1_Click()
   
-  File.Save(User.Home & "/.Scoreboard/img.conf", WidthBox.Value & "|" & HeightBox.Value & "|" & ComboBox2.Current.Text)
-  Me.Close
+  If WidthBox.Value > 0 Or HeightBox.Value > 0 Then
+    File.Save(User.Home & "/.Scoreboard/img.conf", WidthBox.Value & "|" & HeightBox.Value & "|" & ComboBox2.Current.Text)
+    Me.Close
+  Else 
+    Message.Warning("Please don't Enter 0x0 or 0xx or xx0\nI know you have a bigger display resolution ;-) ")
+  Endif
   
 End
 

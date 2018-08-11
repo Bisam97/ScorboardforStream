@@ -2,6 +2,7 @@
 
 { Form Form
   MoveScaled(0,0,43,27)
+  Resizable = False
   { FStart Frame
     MoveScaled(0.8571,0.8571,41,25)
     Text = ("Choose a Option")
@@ -30,5 +31,13 @@
       MoveScaled(23,4,16,4)
       Text = ("Scoreboard")
     }
+  }
+  { getModul Button
+    MoveScaled(43,5,14,9)
+    Text = ("Receive a\nModule")
+  }
+  { submitModul Button
+    MoveScaled(43,15,14,9)
+    Text = ("Submit a\nModule")
   }
 }
