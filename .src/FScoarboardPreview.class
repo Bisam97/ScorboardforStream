@@ -40,6 +40,8 @@ End
 Public Sub Form_Open()
   
   Dim StringSplit As String[]
+  Dim Image1 As Image
+  Dim Image2 As Image
   
   StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
   
@@ -139,7 +141,8 @@ Public Sub makeFinishOverlay(pathToImagesXml As String, pathToTextXml As String,
     Paint.Font = Font[Element.GetAttribute("Font")]
     Paint.brush = Paint.Color(0)
     Paint.Text(Element.GetAttribute("Text"), CFloat(Element.GetAttribute("X")), CFloat(Element.GetAttribute("Y")), 1000, 35)
-    Paint.Fill()
+    Paint.FillRule = 1
+    Paint.Fill
     Paint.End
   Next
   hpic.Save(pachToFinishOverlaySave, 100)

@@ -117,6 +117,8 @@ Public Sub SetXML()
   Dim Element As XmlElement
   Dim txtb As TextBox
   Dim Elements As XmlElement[]
+  Dim Elementsa As XmlElement[]
+  Dim xModuleElements As XmlElement
   
   Doc = New XmlDocument
   Element = New XmlElement("Text")
@@ -130,6 +132,7 @@ Public Sub SetXML()
       
       Doc.Root.AppendChild(Element)
     Next
+    Wait 0.1
     XmlModule = New XmlDocument(s & "/ModuleCall.xml")
     For Each xModuleElement In XmlModule.GetElementsByTagName("Images")
       xModuleElement.SetAttribute("IMGPath", s & "/" & xModuleElement.GetAttribute("IMGPath"))
@@ -173,13 +176,13 @@ Public Sub xmlfill(s As String) As XmlElement[]
     Element.SetAttribute("Text", TournamentRound.Text)
     Element.SetAttribute("X", TRX.Text)
     Element.SetAttribute("Y", TRY.text)
-    Element.SetAttribute("Font", "Sans Serif,58")
+    Element.SetAttribute("Font", "Tarrget Academy,40")
     Elements.Add(Element)
     Element = New XmlElement("Text")
     Element.SetAttribute("Text", Tournament.Text)
     Element.SetAttribute("X", TX.Text)
     Element.SetAttribute("Y", TY.Text)
-    Element.SetAttribute("Font", "Sans Serif,58")
+    Element.SetAttribute("Font", "Tarrget Academy,50")
     Elements.Add(Element)
   Next
   

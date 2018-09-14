@@ -17,25 +17,28 @@ Public Sub Form_Open()
   GridView1.AddColumn("Images")
   GridView1.AddColumn("x")
   GridView1.AddColumn("y")
+  GridView1.AddColumn("Force Resuloution")
   
   GridView2.Header = GridView.Horizontal
   GridView2.AddColumn("Description")
   GridView2.AddColumn("x")
   GridView2.AddColumn("y")
   GridView2.AddColumn("Font")
+  GridView2.AddColumn("Force Resuloution")
   
   GridView1.Mode = Select.Single
   GridView2.Mode = Select.Single
   
 End
 
-Public Sub AddImages(Path As String, x As Float, y As Float)
+Public Sub AddImages(Path As String, x As Float, y As Float, resou As String)
   
   GridView1.Rows.Insert(0)
   GridView1[0, 0].Text = Split(Path, "/", "", True)[Split(Path, "/", "", True).Length - 1]
   GridView1[0, 1].Picture = Picture.Load(Path)
   GridView1[0, 2].Text = x
   GridView1[0, 3].Text = y
+  GridView1[0, 4].text = resou
   
 End
 
@@ -104,7 +107,7 @@ End
 Public Sub OK_Click()
   
   If TxtP.Text
-    AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text))
+    AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text), File.Load(User.Home & "/.Scoreboard/img.conf"))
     
     FIn.Close()
   Else
@@ -181,7 +184,7 @@ End
 Public Sub OK1_Click()
   
   If TxtP.text
-    addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text)
+    addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text, File.Load(User.Home & "/.Scoreboard/img.conf"))
     FIn.Close()
   Else
     Message.Info("Please Insert a Path to a Image")
@@ -198,13 +201,14 @@ Catch
   
 End
 
-Public Sub addText(Description As String, x As Float, y As Float, Font As String)
+Public Sub addText(Description As String, x As Float, y As Float, Font As String, resou As String)
   
   GridView2.Rows.Insert(0)
   GridView2[0, 0].Text = Description
   GridView2[0, 1].Text = x
   GridView2[0, 2].Text = y
   GridView2[0, 3].Text = Font
+  GridView2[0, 4].text = resou
   
 End
 
@@ -256,6 +260,7 @@ Public Sub readOutTextGredView() As XmlElement[]
     t.SetAttribute("X", GridView2[0, 1].Text)
     t.SetAttribute("Y", GridView2[0, 2].Text)
     t.SetAttribute("Font", GridView2[0, 3].Text)
+    t.SetAttribute("Resoulution", GridView2[0, 4].Text)
     t.TagName = "Text"
     s.Add(t)
     GridView2.Rows.Remove(0)
@@ -281,6 +286,7 @@ Public Sub readOutImageGredView() As XmlElement[]
     t.SetAttribute("IMGPath", GridView1[0, 0].Text)
     t.SetAttribute("X", GridView1[0, 2].Text)
     t.SetAttribute("Y", GridView1[0, 3].Text)
+    t.SetAttribute("Resoulution", GridView1[0, 4].Text)
     
     hpic = GridView1[0, 1].Picture
     hpic.Save(User.Home & "/Output/" & ModuleName & "/" & GridView1[0, 0].Text, 100)
@@ -306,7 +312,7 @@ Public Sub Button3_Click()
   Else
     Message.Info("Please Enter a Modulename")
   Endif
-
+  
 End
 
 Public Sub loadModule(pathtoModule As String)

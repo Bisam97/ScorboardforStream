@@ -16,6 +16,13 @@ End
 
 Public Sub Form_Open()
   
+  ' Dim I1 As Image
+  ' Dim i2 As Image
+  ' 
+  ' I1 = Image.Load("/home/bisam97/Schreibtisch/maxresdefault.png")
+  ' i2 = i1.Stretch(1920, 1080)
+  ' i2.Save("/home/bisam97/Schreibtisch/FHDBack.png")
+  ' Quit
   mDir()
   
 End
