@@ -74,7 +74,7 @@ Catch
   
 End
 
-Public Sub Mdir()
+Public Sub Mdir() ''Check Progamm Dirs for Existing and create if not Exist
   
   If Not Exist("/usr/lib/Scoarbord") Then Mkdir "/usr/lib/Scoarbord"
   If Not Exist("/usr/lib/Scoarbord/module") Then Mkdir "/usr/lib/Scoarbord/module"

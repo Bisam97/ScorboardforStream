@@ -1,5 +1,7 @@
 ' Gambas class file
 
+''This is the Module Editor
+
 ModuleName As String
 
 Public FIn As Form
@@ -10,7 +12,7 @@ Public TxtX As TextBox
 Public TxtY As TextBox
 Public TxtFont As ButtonBox
 
-Public Sub Form_Open()
+Public Sub Form_Open() ''Init the Gridview
   
   GridView1.Header = GridView.Horizontal
   GridView1.AddColumn("Images Name")
@@ -31,7 +33,7 @@ Public Sub Form_Open()
   
 End
 
-Public Sub AddImages(Path As String, x As Float, y As Float, resou As String)
+Public Sub AddImages(Path As String, x As Float, y As Float, resou As String) ''Add a Picture with the position Information in the Gridview
   
   GridView1.Rows.Insert(0)
   GridView1[0, 0].Text = Split(Path, "/", "", True)[Split(Path, "/", "", True).Length - 1]
@@ -42,7 +44,7 @@ Public Sub AddImages(Path As String, x As Float, y As Float, resou As String)
   
 End
 
-Public Sub btn1_Click()
+Public Sub btn1_Click() ''The Add a Picture Dialog
   
   FIn = New Form(Me)
   FIn.w = 500
@@ -104,7 +106,7 @@ Public Sub Chooser_Click()
   
 End
 
-Public Sub OK_Click()
+Public Sub OK_Click() 
   
   If TxtP.Text
     AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text), File.Load(User.Home & "/.Scoreboard/img.conf"))
@@ -125,7 +127,7 @@ Catch
   
 End
 
-Public Sub btn2_Click()
+Public Sub btn2_Click() ''The Add a Text Dialog
   
   FIn = New Form(Me)
   FIn.w = 500
@@ -201,7 +203,7 @@ Catch
   
 End
 
-Public Sub addText(Description As String, x As Float, y As Float, Font As String, resou As String)
+Public Sub addText(Description As String, x As Float, y As Float, Font As String, resou As String) ''Add a Text for the Modul in the Gridview
   
   GridView2.Rows.Insert(0)
   GridView2[0, 0].Text = Description
@@ -212,7 +214,7 @@ Public Sub addText(Description As String, x As Float, y As Float, Font As String
   
 End
 
-Public Sub btn3_Click()
+Public Sub btn3_Click() ''Save the Gridview Information in the ModuleCall.xml and the Picurs in the Modul Dir
   
   Dim call As XmlDocument
   ' Dim Element As XmlElement
@@ -247,7 +249,7 @@ Public Sub btn3_Click()
   
 End
 
-Public Sub readOutTextGredView() As XmlElement[]
+Public Sub readOutTextGredView() As XmlElement[] ''Output Funtion for save as Xml
   
   Dim s As XmlElement[]
   Dim t As New XmlElement
@@ -271,7 +273,7 @@ Public Sub readOutTextGredView() As XmlElement[]
   
 End
 
-Public Sub readOutImageGredView() As XmlElement[]
+Public Sub readOutImageGredView() As XmlElement[] ''Output Funtion for save as Xml
   
   Dim s As XmlElement[]
   Dim hpic As New Picture
@@ -300,7 +302,7 @@ Public Sub readOutImageGredView() As XmlElement[]
   
 End
 
-Public Sub TextBox1_KeyRelease()
+Public Sub TextBox1_KeyRelease() ''Set the ModuleName
   
   ModuleName = TextBox1.text
   
@@ -317,7 +319,7 @@ Public Sub Button3_Click()
   
 End
 
-Public Sub loadModule(pathtoModule As String)
+Public Sub loadModule(pathtoModule As String) ''Edit a Exitst Module in /home/USER/Output (Load Function)
   
   Dim s As XmlElement
   
@@ -372,7 +374,7 @@ Public Sub Form_Close()
   
 End
 
-Public Sub Button1_Click()
+Public Sub Button1_Click() ''(WITHOUT SAVE THE CURREND MODULE) Install the Module from the Working Dir /home/USER/Output in /home/USER/.local/lib/scoreboard/module
   
   If TextBox1.text
     Button3_Click()

@@ -5,7 +5,7 @@ Public MTI As TextBox[]
 Public AktivModulePath As String[]
 Public ScrollView1 As ScrollView
 
-Public Sub Button1_Click()
+Public Sub Button1_Click() ''Make with the Informations of the form the Finish Overlay
   
   ' Dim s As String
   
@@ -23,7 +23,7 @@ Catch
   
 End
 
-Public Sub Form_Show()
+Public Sub Form_Show() ''Detection of the active modules
   
   Dim s As String[]
   ' Dim xml As XmlDocument
@@ -61,7 +61,7 @@ Public Sub Form_Show()
   
 End
 
-Public Sub loadModule(AktivModulePat As String[])
+Public Sub loadModule(AktivModulePat As String[]) ''Load the Active Modules for get Informations of the Required text and create the Textboxes for Input of the Required Informations
   
   Dim s As String
   Dim Xml As XmlDocument
@@ -110,7 +110,11 @@ Public Sub ButtonBox1_Click()
   
 End
 
-Public Sub SetXML()
+''-----------------
+''|Upcoming change|
+''-----------------
+
+Public Sub SetXML() ''Fill the Finish Informations in a Xml File
   
   Dim Doc As XmlDocument
   Dim s As String
@@ -159,7 +163,11 @@ Public Sub SetXML()
   
 End
 
-Public Sub xmlfill(s As String) As XmlElement[]
+''-----------------
+''|Upcoming change|
+''-----------------
+
+Public Sub xmlfill(s As String) As XmlElement[] '' Fill the Required Text In Xml Elements
   
   Dim XmlModule As XmlDocument
   Dim xModuleElement As XmlElement
@@ -200,7 +208,10 @@ Public Sub xmlfill(s As String) As XmlElement[]
   
 End
 
-Public Sub setBasic() As XmlElement[]
+''-----------------
+''|Upcoming change|
+''-----------------
+Public Sub setBasic() As XmlElement[] ''Set the Basic Information
   
   Dim Element As XmlElement
   Dim Elements As New XmlElement[]

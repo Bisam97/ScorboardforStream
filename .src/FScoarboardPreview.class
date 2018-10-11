@@ -10,7 +10,7 @@ Static Public Sub LoadIMages(Picture As Picture, x As Float, y As Float)
   
 End
 
-Public Sub loadModule(PathToModule As String)
+Public Sub loadModule(PathToModule As String) ''MODULE EDITOR FUNTCTION This Load the Modules with the Path to the ModuleCall.xml and Draw the information in the file
   
   Dim s As XmlElement
   
@@ -43,11 +43,13 @@ Public Sub Form_Open()
   'Dim Image1 As Image
   'Dim Image2 As Image
   
-  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|") 'Get the Image size by the Image Settings
   
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   
   ScrollArea1.ResizeContents(hPic.w, hPic.h)
+  
+  ''---------v---- This is Playground Code 
   
   ' Paint.Begin(hPic)
   ' 
@@ -111,25 +113,25 @@ Public Sub Button1_Click()
   
 End
 
-Public Sub ScrollArea1_Draw()
+Public Sub ScrollArea1_Draw() ''Re Draw the Picure if a Redraw Needed
   
   Paint.Translate(- ScrollArea1.ScrollX, - ScrollArea1.ScrollY)
   Paint.DrawPicture(hPic, 0, 0)
   
 End
 
-Public Sub makeFinishOverlay(pathToXml As String, pachToFinishOverlaySave As String)
+Public Sub makeFinishOverlay(pathToXml As String, pachToFinishOverlaySave As String) ''Make the Finish Overlay
   
   Dim xml As XmlDocument
   Dim Element As XmlElement
   Dim StringSplit As String[]
   
   xml = New XmlDocument(pathToXml)
-  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|") 
   
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   
-  For Each Element In xml.GetElementsByTagName("Images", 0, -1)
+  For Each Element In xml.GetElementsByTagName("Images", 0, -1)  'Its a XML Doc and this Split the Doc in Elements by Tags and draw the Images and the Text
     Paint.Begin(hpic)
     Paint.DrawPicture(Picture.Load(Element.GetAttribute("IMGPath")), CFloat(Element.GetAttribute("X")), CFloat(Element.GetAttribute("Y")))
     Paint.End
