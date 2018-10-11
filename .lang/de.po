@@ -1,0 +1,167 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: StreamScoreboardToolBasic 3.11.4\n"
+"PO-Revision-Date: 2018-10-11 17:52 UTC\n"
+"Last-Translator: bisam97 <bisam97@bisam97.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .project:1
+msgid "Scoreboard Tool for Stream"
+msgstr ""
+
+#: .project:2
+msgid "A Scorboard Tool for FG Streams"
+msgstr ""
+
+#: FKeySetting.form:23
+msgid "Add a new Image"
+msgstr ""
+
+#: FKeySetting.form:28
+msgid "Editor Settings"
+msgstr ""
+
+#: FKeySetting.form:33
+msgid "Add a new Text"
+msgstr ""
+
+#: FMain.form:20
+msgid "Choose a Option"
+msgstr ""
+
+#: FMain.form:24
+msgid "Activate Module"
+msgstr ""
+
+#: FMain.form:29
+msgid "Module Editor"
+msgstr ""
+
+#: FMain.form:33
+msgid "New Module\nEdit Module\n\nModule Editor"
+msgstr ""
+
+#: FMain.form:39
+msgid "Image Settings"
+msgstr ""
+
+#: FMain.form:45
+msgid "Key settings"
+msgstr ""
+
+#: FMain.form:50
+msgid "Scoreboard"
+msgstr ""
+
+#: FMain.form:56
+msgid "Receive a\nModule"
+msgstr ""
+
+#: FMain.form:61
+msgid "Submit a\nModule"
+msgstr ""
+
+#: FModule.form:17
+msgid "Refreash"
+msgstr ""
+
+#: FModule.form:22
+msgid "Choose the Module for Activation"
+msgstr ""
+
+#: FPresetSetup.form:24
+msgid "Insert Image"
+msgstr ""
+
+#: FPresetSetup.form:33
+msgid "Insert Text"
+msgstr ""
+
+#: FPresetSetup.form:38
+msgid "Save and\nInstall Module"
+msgstr ""
+
+#: FPresetSetup.form:43
+msgid "Save Module"
+msgstr ""
+
+#: FPresetSetup.form:48
+msgid "Refresh Preview"
+msgstr ""
+
+#: FPresetSetup.form:57
+msgid "Load Module"
+msgstr ""
+
+#: FScoreboard.form:31
+msgid "Basic Module Settings"
+msgstr ""
+
+#: FScoreboard.form:52
+msgid "Picture Aktualisiren"
+msgstr ""
+
+#: FScoreboard.form:67
+msgid "Module Text Insert"
+msgstr ""
+
+#: FScoreboard.form:76
+msgid "Save Path of the Picture"
+msgstr ""
+
+#: FimgSetting.form:20
+msgid "Size"
+msgstr ""
+
+#: FimgSetting.form:25
+msgid "Custom"
+msgstr ""
+
+#: FimgSetting.form:25
+msgid "1080p (1920x1080)"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "720p (1280x720)"
+msgstr "-"
+
+#: FimgSetting.form:25
+msgid "480p (640x480)"
+msgstr "-"
+
+#: FimgSetting.form:30
+msgid "Width"
+msgstr ""
+
+#: FimgSetting.form:35
+msgid "Height"
+msgstr ""
+
+#: FimgSetting.form:50
+msgid "PNG"
+msgstr ""
+
+#: FimgSetting.form:50
+msgid "JPG"
+msgstr ""
+
+#: FimgSetting.form:50
+msgid "BMP"
+msgstr ""
+
+#: FimgSetting.form:55
+msgid "Choose the Data Type"
+msgstr ""
+
+#: FimgSetting.form:60
+msgid "Save"
+msgstr ""
+
+#: FimgSetting.form:65
+msgid "Chancel"
+msgstr ""
+

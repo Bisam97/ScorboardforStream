@@ -1,7 +1,5 @@
 ' Gambas class file
 
-p As Preset
-
 Public Sub Button1_Click()
   
   FModule.Show()

@@ -215,7 +215,7 @@ End
 Public Sub btn3_Click()
   
   Dim call As XmlDocument
-  Dim Element As XmlElement
+  ' Dim Element As XmlElement
   Dim sIGV As XmlElement[]
   Dim s As XmlElement
   Dim sTGV As XmlElement[]
@@ -261,6 +261,7 @@ Public Sub readOutTextGredView() As XmlElement[]
     t.SetAttribute("Y", GridView2[0, 2].Text)
     t.SetAttribute("Font", GridView2[0, 3].Text)
     t.SetAttribute("Resoulution", GridView2[0, 4].Text)
+    t.SetAttribute("module", TextBox1.Text)
     t.TagName = "Text"
     s.Add(t)
     GridView2.Rows.Remove(0)
@@ -287,6 +288,7 @@ Public Sub readOutImageGredView() As XmlElement[]
     t.SetAttribute("X", GridView1[0, 2].Text)
     t.SetAttribute("Y", GridView1[0, 3].Text)
     t.SetAttribute("Resoulution", GridView1[0, 4].Text)
+    t.SetAttribute("module", TextBox1.Text)
     
     hpic = GridView1[0, 1].Picture
     hpic.Save(User.Home & "/Output/" & ModuleName & "/" & GridView1[0, 0].Text, 100)

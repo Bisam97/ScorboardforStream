@@ -7,24 +7,26 @@ Public ScrollView1 As ScrollView
 
 Public Sub Button1_Click()
   
-  Dim s As String
+  ' Dim s As String
   
   FScoarboardPreview.Show()
   FScoarboardPreview.x = Me.x + Me.w
   SetXML()
   Print "test"
-  FScoarboardPreview.makeFinishOverlay("/tmp/Images.xml", "/tmp/Text.xml", ButtonBox1.text)
+  FScoarboardPreview.makeFinishOverlay("/tmp/Images.xml", ButtonBox1.text)
 Catch
-  If Error.code = 6 Or Error.code = -1 Then
-    Message.Error("Please Check the Input\nand down't forget the inputs of the round of the game.")
-  Endif
+  ' If Error.code = 6 Or Error.code = -1 Then
+  '   Message.Error("Please Check the Input\nand down't forget the inputs of the round of the game.")
+  ' Else 
+  Message.Error(Error.Text & "\n" & Error.Where)
+  ' Endif
   
 End
 
 Public Sub Form_Show()
   
   Dim s As String[]
-  Dim xml As XmlDocument
+  ' Dim xml As XmlDocument
   
   AktivModulePath = New String[]
   MTI = New TextBox[]
@@ -115,33 +117,45 @@ Public Sub SetXML()
   Dim XmlModule As XmlDocument
   Dim xModuleElement As XmlElement
   Dim Element As XmlElement
-  Dim txtb As TextBox
   Dim Elements As XmlElement[]
-  Dim Elementsa As XmlElement[]
-  Dim xModuleElements As XmlElement
+  ' Dim xModuleElements As XmlElement
+  Dim ElementModul As XmlElement
+  Dim text As XmlElement
   
   Doc = New XmlDocument
-  Element = New XmlElement("Text")
   
   For Each s In AktivModulePath
-    Doc.Root.AppendChild(Doc.CreateElement("Debug"))  
     
     Elements = xmlfill(s)
-    
+    ElementModul = Doc.CreateElement("a")
+    Doc.Root.AppendChild(ElementModul)
+    text = Doc.CreateElement("Text")
+    ElementModul.AppendChild(text)
     For Each Element In Elements
       
-      Doc.Root.AppendChild(Element)
+      text.AppendChild(Element)
     Next
     Wait 0.1
     XmlModule = New XmlDocument(s & "/ModuleCall.xml")
     For Each xModuleElement In XmlModule.GetElementsByTagName("Images")
-      xModuleElement.SetAttribute("IMGPath", s & "/" & xModuleElement.GetAttribute("IMGPath"))
-      Doc.Root.AppendChild(xModuleElement)
+      text = Doc.CreateElement("Images")
+      ElementModul.AppendChild(text)
+      ElementModul.TagName = xModuleElement.GetAttribute("module")
+      text.SetAttribute("IMGPath", s & "/" & xModuleElement.GetAttribute("IMGPath"))
+      text.SetAttribute("X", xModuleElement.GetAttribute("X"))
+      text.SetAttribute("Y", xModuleElement.GetAttribute("Y"))
+      
+      ' Doc.Root.AppendChild(xModuleElement)
     Next
     
   Next
-  Print Doc.Content
+  ElementModul = Doc.CreateElement("Basic")
+  Doc.Root.AppendChild(ElementModul)
+  For Each Element In setBasic()
+    ElementModul.AppendChild(Element)
+  Next
   Doc.Save("/tmp/Images.xml")
+  'File.Save("/tmp/test.2", Doc.ToString(True))
   
 End
 
@@ -162,7 +176,9 @@ Public Sub xmlfill(s As String) As XmlElement[]
     For Each txtb In MTI
       
       If txtb.tag = xModuleElement.GetAttribute("Description") Then
-        Element = New XmlElement("Text")
+        
+        Element = New XmlElement("Txt")
+        
         Element.SetAttribute("Text", txtb.Text)
         Element.SetAttribute("X", xModuleElement.GetAttribute("X"))
         Element.SetAttribute("Y", xModuleElement.GetAttribute("Y"))
@@ -172,25 +188,35 @@ Public Sub xmlfill(s As String) As XmlElement[]
       Endif
       
     Next
-    Element = New XmlElement("Text")
-    Element.SetAttribute("Text", TournamentRound.Text)
-    Element.SetAttribute("X", TRX.Text)
-    Element.SetAttribute("Y", TRY.text)
-    Element.SetAttribute("Font", "Tarrget Academy,40")
-    Elements.Add(Element)
-    Element = New XmlElement("Text")
-    Element.SetAttribute("Text", Tournament.Text)
-    Element.SetAttribute("X", TX.Text)
-    Element.SetAttribute("Y", TY.Text)
-    Element.SetAttribute("Font", "Tarrget Academy,50")
-    Elements.Add(Element)
+    
   Next
   
-  For Each Element In Elements
-    xml.Root.AppendChild(Element)
-  Next
-  xml.Save("/tmp/Text.xml")
-  Elements = New XmlElement[]
+  ' For Each Element In Elements
+  '   xml.Root.AppendChild(Element)
+  ' Next
+  ' xml.Save("/tmp/Text.xml")
+  ' File.Save("/tmp/test.1", xml.ToString(True))
+  Return Elements
+  
+End
+
+Public Sub setBasic() As XmlElement[]
+  
+  Dim Element As XmlElement
+  Dim Elements As New XmlElement[]
+  
+  Element = New XmlElement("Text")
+  Element.SetAttribute("Text", TournamentRound.Text)
+  Element.SetAttribute("X", TRX.Text)
+  Element.SetAttribute("Y", TRY.text)
+  Element.SetAttribute("Font", "Tarrget Academy,40")
+  Elements.Add(Element)
+  Element = New XmlElement("Text")
+  Element.SetAttribute("Text", Tournament.Text)
+  Element.SetAttribute("X", TX.Text)
+  Element.SetAttribute("Y", TY.Text)
+  Element.SetAttribute("Font", "Tarrget Academy,50")
+  Elements.Add(Element)
   Return Elements
   
 End

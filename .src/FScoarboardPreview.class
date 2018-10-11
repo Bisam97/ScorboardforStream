@@ -40,8 +40,8 @@ End
 Public Sub Form_Open()
   
   Dim StringSplit As String[]
-  Dim Image1 As Image
-  Dim Image2 As Image
+  'Dim Image1 As Image
+  'Dim Image2 As Image
   
   StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
   
@@ -118,25 +118,23 @@ Public Sub ScrollArea1_Draw()
   
 End
 
-Public Sub makeFinishOverlay(pathToImagesXml As String, pathToTextXml As String, pachToFinishOverlaySave As String)
+Public Sub makeFinishOverlay(pathToXml As String, pachToFinishOverlaySave As String)
   
-  Dim txt As XmlDocument
-  Dim images As XmlDocument
+  Dim xml As XmlDocument
   Dim Element As XmlElement
   Dim StringSplit As String[]
   
-  txt = New XmlDocument(pathToTextXml)
-  images = New XmlDocument(pathToImagesXml)
+  xml = New XmlDocument(pathToXml)
   StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
   
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   
-  For Each Element In images.GetElementsByTagName("Images")
+  For Each Element In xml.GetElementsByTagName("Images", 0, -1)
     Paint.Begin(hpic)
     Paint.DrawPicture(Picture.Load(Element.GetAttribute("IMGPath")), CFloat(Element.GetAttribute("X")), CFloat(Element.GetAttribute("Y")))
     Paint.End
   Next
-  For Each Element In txt.GetElementsByTagName("Text")
+  For Each Element In xml.GetElementsByTagName("Txt", 1, -1)
     Paint.Begin(hpic)
     Paint.Font = Font[Element.GetAttribute("Font")]
     Paint.brush = Paint.Color(0)
