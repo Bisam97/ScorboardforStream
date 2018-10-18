@@ -15,4 +15,7 @@ The Main Menu
 
 ## This things will be come gradually
 + create Picture Comboboxes in the module editor (ex.flags from country of the Player)
-+ to get finish or templates form a server
++ to get finish module form a server
+
+
+### This Program is write in Gambas 3 ###
