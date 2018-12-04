@@ -1,40 +1,40 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,64,89)
   { TournamentRound TextBox
-    MoveScaled(1,35,24,4)
+    MoveScaled(1,62,24,4)
   }
   { Tournament TextBox
-    MoveScaled(1,40,24,4)
+    MoveScaled(1,67,24,4)
   }
   { Label1 Label
-    MoveScaled(2,31,24,4)
+    MoveScaled(2,58,24,4)
     Text = ("Basic Module Settings")
   }
   { TRX TextBox
-    MoveScaled(26,35,9,4)
+    MoveScaled(26,62,9,4)
   }
   { TRY TextBox
-    MoveScaled(36,35,9,4)
+    MoveScaled(36,62,9,4)
   }
   { TX TextBox
-    MoveScaled(26,40,9,4)
+    MoveScaled(26,67,9,4)
   }
   { TY TextBox
-    MoveScaled(36,40,9,4)
+    MoveScaled(36,67,9,4)
   }
   { Button1 Button
-    MoveScaled(23,56,18,4)
+    MoveScaled(23,83,18,4)
     Text = ("Picture Aktualisiren")
   }
   { Label2 Label
-    MoveScaled(46,35,24,4)
+    MoveScaled(46,62,24,4)
     #Translate = False
     Text = "Round | X | Y"
   }
   { Label3 Label
-    MoveScaled(46,40,24,4)
+    MoveScaled(46,67,24,4)
     #Translate = False
     Text = "Tournament | X | Y"
   }
@@ -43,10 +43,20 @@
     Text = ("Module Text Insert")
   }
   { ButtonBox1 ButtonBox
-    MoveScaled(20,51,24,4)
+    MoveScaled(20,78,24,4)
   }
   { Label5 Label
-    MoveScaled(20,46,24,4)
+    MoveScaled(20,73,24,4)
     Text = ("Save Path of the Picture")
+  }
+  { ScrollView1 ScrollView
+    MoveScaled(0,6,64,23.4286)
+  }
+  { Label6 Label
+    MoveScaled(16,30,24,4)
+    Text = ("Module List Choose")
+  }
+  { ScrollView2 ScrollView
+    MoveScaled(0,34,64,22)
   }
 }

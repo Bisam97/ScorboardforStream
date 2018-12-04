@@ -1,2 +1,32 @@
 ' Gambas class file
 
+Public Sub Button1_Click()
+  
+  If FModuleEditor.InsertSelector(bX.Value, bY.Value, List.List, Dfault.Value, TitelName.Text) Then
+    Me.Close
+  Else
+    Select Message.Error("List can't save in the Module", "Try again", "Reinsert", "cancle")
+      Default 
+        Me.Close
+    End Select
+  Endif
+  
+End
+
+Public Sub Button2_Click()
+  
+  Dim s As String
+  Dim a As New String[]
+  Dim dirs As String[]
+  
+  If Not Dialog.SelectDirectory() Then
+    
+    For Each s In Dir(Dialog.Path).Sort()
+      Print s
+      a.Add(Dialog.Path & "/" & s)
+    Next
+    List.List = a
+    Print List.List.Length
+  Endif
+  
+End

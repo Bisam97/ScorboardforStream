@@ -28,8 +28,17 @@ Public Sub Form_Open() ''Init the Gridview
   GridView2.AddColumn("Font")
   GridView2.AddColumn("Force Resuloution")
   
+  GridView3.Header = GridView.Horizontal
+  GridView3.AddColumn("Images List")
+  GridView3.AddColumn("Name")
+  GridView3.AddColumn("Default")
+  GridView3.AddColumn("x")
+  GridView3.AddColumn("y")
+  GridView3.AddColumn("Force Resuloution")
+  
   GridView1.Mode = Select.Single
   GridView2.Mode = Select.Single
+  GridView3.Mode = Select.Single
   
 End
 
@@ -221,6 +230,7 @@ Public Sub btn3_Click() ''Save the Gridview Information in the ModuleCall.xml an
   Dim sIGV As XmlElement[]
   Dim s As XmlElement
   Dim sTGV As XmlElement[]
+  Dim sLGV As XmlElement[]
   
   If Not Exist(User.Home & "/Output") Then Mkdir User.home & "/Output"
   If Not Exist(User.home & "/Output/" & ModuleName) Then Mkdir User.home & "/Output/" & ModuleName
@@ -240,7 +250,12 @@ Public Sub btn3_Click() ''Save the Gridview Information in the ModuleCall.xml an
       call.Root.AppendChild(s)
       
     Next
-    
+    sLGV = readOutListGredView()
+    For Each s In sLGV
+      
+      call.Root.AppendChild(s)
+      
+    Next
     Print call.Content
     call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")  
   Else
@@ -267,6 +282,30 @@ Public Sub readOutTextGredView() As XmlElement[] ''Output Funtion for save as Xm
     t.TagName = "Text"
     s.Add(t)
     GridView2.Rows.Remove(0)
+    t = New XmlElement
+  Wend
+  Return s
+  
+End
+
+Public Sub readOutListGredView() As XmlElement[] ''Output Funtion for save as Xml
+  
+  Dim s As XmlElement[]
+  Dim t As New XmlElement
+  
+  s = New XmlElement[]
+  
+  While GridView3.Rows.Count > 0
+    
+    t.SetAttribute("List", GridView3[0, 0].Text)
+    t.SetAttribute("Name", GridView3[0, 1].Text)
+    t.SetAttribute("Default", GridView3[0, 2].Text)
+    t.SetAttribute("x", GridView3[0, 3].Text)
+    t.SetAttribute("y", GridView3[0, 4].Text)
+    t.SetAttribute("module", TextBox1.Text)
+    t.TagName = "List"
+    s.Add(t)
+    GridView3.Rows.Remove(0)
     t = New XmlElement
   Wend
   Return s
@@ -343,14 +382,25 @@ Public Sub loadModule(pathtoModule As String) ''Edit a Exitst Module in /home/US
     
   Next
   
+  For Each s In doc.GetElementsByTagName("List")
+    GridView3.Rows.Insert(0)
+    GridView3[0, 0].Text = s.GetAttribute("List")
+    GridView3[0, 1].Text = s.GetAttribute("Name")
+    GridView3[0, 2].Text = s.GetAttribute("Default")
+    GridView3[0, 3].Text = s.GetAttribute("x")
+    GridView3[0, 4].Text = s.GetAttribute("y")
+  Next
+  
 End
 
 Public Sub Button2_Click()
   
   GridView1.Clear()
   GridView2.Clear()
+  GridView3.Clear()
   GridView1.Rows.Count = 0
   GridView2.Rows.Count = 0
+  GridView3.Rows.Count = 0
   
   loadModule(User.home & "/Output/" & ModuleName)
   FScoarboardPreview.loadModule(User.home & "/Output/" & ModuleName)
@@ -405,5 +455,49 @@ Public Sub GridView2_KeyPress()
       Print Error.where
     Endif
   Endif
+  
+End
+
+Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault As Integer, TitelName As String) As Boolean
+  
+  Dim s As String
+  Dim workdir As String
+  Dim List2 As String[]
+  Dim a As String
+  
+  btn3_Click()
+  Button2_Click()
+  If Not Exist(User.home & "/Output/" & ModuleName & "/" & TitelName) Then
+    Mkdir User.Home & "/Output/" & ModuleName & "/" & TitelName
+  Endif
+  Workdir = User.Home & "/Output/" & ModuleName & "/" & TitelName
+  List2 = New String[]
+  
+  For Each s In List
+    
+    Exec ["cp", s, workdir & "/" & File.name(s)]
+    s = ModuleName & "/" & TitelName & "/" & File.Name(s)
+    a = s & ";" & a
+    List2.Add(s)
+    
+  Next
+  GridView3.Rows.Insert(0)
+  GridView3[0, 0].Text = a
+  GridView3[0, 1].Text = TitelName
+  GridView3[0, 2].Text = Dfault
+  GridView3[0, 3].Text = X
+  GridView3[0, 4].Text = Y
+  
+  Return True
+  
+End
+
+Public Sub btn4_Click()
+  
+  Dim isert As FInsertList
+  
+  isert = New FInsertList(Me)
+  isert.x = 380
+  isert.y = 230
   
 End

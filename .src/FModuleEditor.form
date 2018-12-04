@@ -1,39 +1,47 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,64,64)
+  MoveScaled(0,0,125,67)
   { GridView1 GridView
-    MoveScaled(2,5,50,16)
+    MoveScaled(2,8,50,16)
     ShowCursor = True
   }
   { btn1 Button
-    MoveScaled(17,22,16,4)
+    MoveScaled(17,25,16,4)
     Text = ("Insert Image")
   }
   { GridView2 GridView
-    MoveScaled(2,32,50,15)
+    MoveScaled(2,35,50,15)
   }
   { btn2 Button
-    MoveScaled(17,48,16,4)
+    MoveScaled(17,51,16,4)
     Text = ("Insert Text")
   }
   { Button1 Button
-    MoveScaled(2,57,16,4)
+    MoveScaled(15,60,16,4)
     Text = ("Save and\nInstall Module")
   }
   { btn3 Button
-    MoveScaled(36,57,16,4)
+    MoveScaled(46,60,16,4)
     Text = ("Save Module")
   }
   { Button3 Button
-    MoveScaled(19,57,16,4)
+    MoveScaled(77,60,16,4)
     Text = ("Refresh Preview")
   }
   { TextBox1 TextBox
-    MoveScaled(14,0,24,4)
+    MoveScaled(23.5714,2,24,4)
   }
   { Button2 Button
-    MoveScaled(39,0,13,4)
+    MoveScaled(71.2857,2,13,4)
     Text = ("Load Module")
+  }
+  { GridView3 GridView
+    MoveScaled(56,8,50,16)
+    ShowCursor = True
+  }
+  { btn4 Button
+    MoveScaled(71,25,16,4)
+    Text = ("Insert Selector")
   }
 }

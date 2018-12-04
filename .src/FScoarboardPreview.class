@@ -2,10 +2,10 @@
 
 Static Public hPic As Picture
 
-Static Public Sub LoadIMages(Picture As Picture, x As Float, y As Float)
+Static Public Sub LoadIMages(Pic As Picture, x As Float, y As Float)
   
   Paint.Begin(hPic)
-  Paint.DrawPicture(Picture, x, y)
+  Paint.DrawPicture(Pic, x, y)
   Paint.End
   
 End
