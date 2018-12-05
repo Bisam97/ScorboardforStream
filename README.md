@@ -14,7 +14,9 @@ The Main Menu
 **Image Settings** The Settings you can chose the hight and the width of the Overlay
 
 ## This things will be come gradually
-+ create Picture Comboboxes in the module editor (ex.flags from country of the Player)
++ Install manual for Windows 10
++ Coordinates tranking for build a Module (click in the preview on a point to insert the coordinates in the appropriate box)
++ Change the xmlFiles in sqlite database (one database for all modules)
 + to get finish module form a server
 
 
