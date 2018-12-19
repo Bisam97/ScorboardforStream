@@ -1,0 +1,45 @@
+' Gambas module file
+
+Public stat As Boolean
+Public Permision As Boolean
+
+Public Sub checkOnline() As Boolean
+  
+  Mkdir "/tmp/Scoreboard"
+  Mkdir "/tmp/Scoreboard/module"
+  Shell "wget -o /tmp/Scoreboard/module/Online.txt -q www.bisam97.de/Scoreboard/Online.txt"
+  Wait 3
+  If File.Load("/tmp/Scoreboard/module/Online.txt") == "Online" Then 
+    Shell "rm /tmp/Scoreboard/module/Online.txt"
+    Return False
+  Endif
+  Shell "rm /tmp/Scoreboard/module/Online.txt"
+  Return True
+  
+End
+
+Public Sub clear()
+  
+  Shell "rm -r /tmp/Scoreboard"
+  
+End
+
+Public Sub getModuleList()
+  
+  If Me.stat Then
+    
+    Shell "wget -q -o /tmp/Scoreboard/module/Module.list www.bisam97.de/Scoreboard/module/Module.list"
+    Me.makeList()
+    
+  Else
+    Message.Error("The Server isn't ready for the request \n Error Code: 051-0001")
+  Endif
+  
+End
+
+Public Sub makeList()
+
+  WModuleList.Hide()
+  WModuleList.setList("/tmp/Scoreboard/module/Module.list")
+
+End
