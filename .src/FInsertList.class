@@ -2,7 +2,7 @@
 
 Public Sub Button1_Click()
 
-  If FModuleEditor.InsertSelector(bX.Value, bY.Value, List.List, Dfault.Value, TitelName.Text) Then
+  If FModuleEditor.InsertSelector(bX.Value, bY.Value, List.List, Dfault.Text, TitelName.Text) Then
     Me.Close
   Else
     Select Message.Error("List can't save in the Module", "Try again", "Reinsert", "cancle")

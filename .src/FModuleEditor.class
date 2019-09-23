@@ -460,7 +460,7 @@ Public Sub GridView2_KeyPress()
 
 End
 
-Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault As Integer, TitelName As String) As Boolean
+Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault As String, TitelName As String) As Boolean
 
   Dim s As String
   Dim workdir As String

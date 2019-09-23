@@ -69,6 +69,7 @@ Public Sub loadModule(AktivModulePat As String[]) ''Load the Active Modules for 
   Dim l As Label
   Dim c As ComboBox
   Dim lasty2 As Integer
+  Dim sp As Separator
 
   lastY = 0
   lasty2 = 0
@@ -98,6 +99,13 @@ Public Sub loadModule(AktivModulePat As String[]) ''Load the Active Modules for 
       lastY = t.Y + t.h
       MTI.Add(t)
     Next
+    sp = New Separator(ScrollView1)
+    With sp
+      .y = lastY + 10
+      .W = ScrollView2.w
+    End With
+    lasty += 20
+
     Elements = xml.GetElementsByTagName("List")
     For Each Element In Elements
       c = New ComboBox(ScrollView2)
@@ -109,7 +117,8 @@ Public Sub loadModule(AktivModulePat As String[]) ''Load the Active Modules for 
         .x = 5
         .y = 5 + lasty2
         .List = Split(Element.GetAttribute("List"), ";")
-        .Index = Element.GetAttribute("Default")
+        .Index = .Find(Element.GetAttribute("Default"))
+
       End With
       l = New Label(ScrollView2)
       With l
@@ -123,6 +132,12 @@ Public Sub loadModule(AktivModulePat As String[]) ''Load the Active Modules for 
       lasty2 = c.y + c.H
       MLC.Add(C)
     Next
+    sp = New Separator(ScrollView2)
+    With sp
+      .y = lastY2 + 10
+      .W = ScrollView2.w
+    End With
+    lasty2 += 20
   Next
 
 End

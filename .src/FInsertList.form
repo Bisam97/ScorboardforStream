@@ -1,12 +1,9 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,64,24)
+  MoveScaled(0,0,74,24)
   { List ListEditor
     MoveScaled(0,6,22,18)
-  }
-  { Dfault SpinBox
-    MoveScaled(25,10,9,4)
   }
   { Label1 Label
     MoveScaled(24,6,24,4)
@@ -24,18 +21,18 @@
     Text = ("Name (for identifying in the Scloreboard)")
   }
   { Label4 Label
-    MoveScaled(45,6,24,4)
+    MoveScaled(52,6,24,4)
     Text = ("X")
   }
   { Label5 Label
-    MoveScaled(53,6,24,4)
+    MoveScaled(60,6,24,4)
     Text = ("Y")
   }
   { bX ValueBox
-    MoveScaled(42,10,8,4)
+    MoveScaled(49,10,8,4)
   }
   { bY ValueBox
-    MoveScaled(51,10,8,4)
+    MoveScaled(58,10,8,4)
   }
   { Button1 Button
     MoveScaled(47,1,16,4)
@@ -44,5 +41,8 @@
   { Button2 Button
     MoveScaled(25,1,16,4)
     Text = ("List input by Dir")
+  }
+  { Dfault TextBox
+    MoveScaled(23,10,24,4)
   }
 }
