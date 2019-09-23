@@ -8,26 +8,26 @@ Public FIn As Form
 Public BtPC As Button
 Public Btok As Button
 Public TxtP As TextBox
-Public TxtX As TextBox 
+Public TxtX As TextBox
 Public TxtY As TextBox
 Public TxtFont As ButtonBox
 
 Public Sub Form_Open() ''Init the Gridview
-  
+
   GridView1.Header = GridView.Horizontal
   GridView1.AddColumn("Images Name")
   GridView1.AddColumn("Images")
   GridView1.AddColumn("x")
   GridView1.AddColumn("y")
   GridView1.AddColumn("Force Resuloution")
-  
+
   GridView2.Header = GridView.Horizontal
   GridView2.AddColumn("Description")
   GridView2.AddColumn("x")
   GridView2.AddColumn("y")
   GridView2.AddColumn("Font")
   GridView2.AddColumn("Force Resuloution")
-  
+
   GridView3.Header = GridView.Horizontal
   GridView3.AddColumn("Images List")
   GridView3.AddColumn("Name")
@@ -35,30 +35,31 @@ Public Sub Form_Open() ''Init the Gridview
   GridView3.AddColumn("x")
   GridView3.AddColumn("y")
   GridView3.AddColumn("Force Resuloution")
-  
+
   GridView1.Mode = Select.Single
   GridView2.Mode = Select.Single
   GridView3.Mode = Select.Single
-  
+
 End
 
 Public Sub AddImages(Path As String, x As Float, y As Float, resou As String) ''Add a Picture with the position Information in the Gridview
-  
+
   GridView1.Rows.Insert(0)
   GridView1[0, 0].Text = Split(Path, "/", "", True)[Split(Path, "/", "", True).Length - 1]
   GridView1[0, 1].Picture = Picture.Load(Path)
   GridView1[0, 2].Text = x
   GridView1[0, 3].Text = y
   GridView1[0, 4].text = resou
-  
+
 End
 
 Public Sub btn1_Click() ''The Add a Picture Dialog
-  
-  FIn = New Form(Me)
+
+  Try FIn.Close()
+  FIn = New Form(Panel1)
   FIn.w = 500
   FIn.h = 300
-  FIn.y = btn1.y - 5
+
   btn1.x += 3
   FIn.Border = True
   FIn.Show()
@@ -67,7 +68,7 @@ Public Sub btn1_Click() ''The Add a Picture Dialog
   TxtX = New TextBox(FIn)
   TxtY = New TextBox(FIn)
   Btok = New Button(FIn) As "OK"
-  
+
   With TxtP
     .x = 5
     .y = 5
@@ -84,7 +85,7 @@ Public Sub btn1_Click() ''The Add a Picture Dialog
   End With
   With TxtY
     .x = 5 + TxtX.x + 112
-    .y = 5 
+    .y = 5
     .H = 28
     .w = 112
     .Tooltip = "Y Codinate of the Image"
@@ -104,22 +105,22 @@ Public Sub btn1_Click() ''The Add a Picture Dialog
     .Text = "Insert"
   End With
   TxtP.SetFocus()
-  
+
 End
 
 Public Sub Chooser_Click()
-  
+
   Dialog.Title = "Wähle das Blid"
   Dialog.OpenFile()
   TxtP.Text = Dialog.Path
-  
+
 End
 
-Public Sub OK_Click() 
-  
+Public Sub OK_Click()
+
   If TxtP.Text
     AddImages(TxtP.Text, CFloat(TxtX.Text), CFloat(TxtY.Text), File.Load(User.Home & "/.Scoreboard/img.conf"))
-    
+
     FIn.Close()
   Else
     Message.Info("Please Insert a Path to a Image")
@@ -133,25 +134,26 @@ Catch
   Endif
   Print Error.Text
   Print Error.Where
-  
+
 End
 
 Public Sub btn2_Click() ''The Add a Text Dialog
-  
-  FIn = New Form(Me)
+
+  Try FIn.Close()
+  FIn = New Form(Panel1)
   FIn.w = 500
   FIn.h = 300
-  FIn.y = btn2.y - 5
+
   btn1.x += 3
   FIn.Border = True
   FIn.Show()
-  
+
   TxtP = New TextBox(FIn)
   TxtX = New TextBox(FIn)
   TxtY = New TextBox(FIn)
   Btok = New Button(FIn) As "OK1"
   TxtFont = New ButtonBox(FIn) As "FontC"
-  
+
   With TxtP
     .x = 5
     .y = 5
@@ -168,15 +170,15 @@ Public Sub btn2_Click() ''The Add a Text Dialog
   End With
   With TxtY
     .x = 5 + TxtX.x + 112
-    .y = 5 
+    .y = 5
     .H = 28
     .w = 112
     .Tooltip = "Y Codinate of the Text"
   End With
-  
+
   With TxtFont
-    .x = 5 
-    .y = 38 
+    .x = 5
+    .y = 38
     .H = 28
     .w = 112
     .Tooltip = "Font of the Text"
@@ -189,11 +191,11 @@ Public Sub btn2_Click() ''The Add a Text Dialog
     .Text = "Insert"
   End With
   TxtP.SetFocus()
-  
+
 End
 
 Public Sub OK1_Click()
-  
+
   If TxtP.text
     addText(TxtP.text, CFloat(TxtX.Text), CFloat(TxtY.Text), TxtFont.Text, File.Load(User.Home & "/.Scoreboard/img.conf"))
     FIn.Close()
@@ -209,70 +211,70 @@ Catch
   Endif
   Print Error.Text
   Print Error.Where
-  
+
 End
 
 Public Sub addText(Description As String, x As Float, y As Float, Font As String, resou As String) ''Add a Text for the Modul in the Gridview
-  
+
   GridView2.Rows.Insert(0)
   GridView2[0, 0].Text = Description
   GridView2[0, 1].Text = x
   GridView2[0, 2].Text = y
   GridView2[0, 3].Text = Font
   GridView2[0, 4].text = resou
-  
+
 End
 
 Public Sub btn3_Click() ''Save the Gridview Information in the ModuleCall.xml and the Picurs in the Modul Dir
-  
+
   Dim call As XmlDocument
   ' Dim Element As XmlElement
   Dim sIGV As XmlElement[]
   Dim s As XmlElement
   Dim sTGV As XmlElement[]
   Dim sLGV As XmlElement[]
-  
+
   If Not Exist(User.Home & "/Output") Then Mkdir User.home & "/Output"
   If Not Exist(User.home & "/Output/" & ModuleName) Then Mkdir User.home & "/Output/" & ModuleName
-  
+
   call = New XmlDocument
   sIGV = readOutImageGredView()
-  
+
   If ModuleName Then
     For Each s In sIGV
-      
+
       call.Root.AppendChild(s)
-      
+
     Next
     sTGV = readOutTextGredView()
     For Each s In sTGV
-      
+
       call.Root.AppendChild(s)
-      
+
     Next
     sLGV = readOutListGredView()
     For Each s In sLGV
-      
+
       call.Root.AppendChild(s)
-      
+
     Next
     Print call.Content
-    call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")  
+    call.Save(User.home & "/Output/" & ModuleName & "/ModuleCall.xml")
   Else
     Message.Info("Please Enter a Modulename")
   Endif
-  
+
 End
 
 Public Sub readOutTextGredView() As XmlElement[] ''Output Funtion for save as Xml
-  
+
   Dim s As XmlElement[]
   Dim t As New XmlElement
-  
+
   s = New XmlElement[]
-  
+
   While GridView2.Rows.Count > 0
-    
+
     t.SetAttribute("Description", GridView2[0, 0].Text)
     t.SetAttribute("X", GridView2[0, 1].Text)
     t.SetAttribute("Y", GridView2[0, 2].Text)
@@ -285,18 +287,18 @@ Public Sub readOutTextGredView() As XmlElement[] ''Output Funtion for save as Xm
     t = New XmlElement
   Wend
   Return s
-  
+
 End
 
 Public Sub readOutListGredView() As XmlElement[] ''Output Funtion for save as Xml
-  
+
   Dim s As XmlElement[]
   Dim t As New XmlElement
-  
+
   s = New XmlElement[]
-  
+
   While GridView3.Rows.Count > 0
-    
+
     t.SetAttribute("List", GridView3[0, 0].Text)
     t.SetAttribute("Name", GridView3[0, 1].Text)
     t.SetAttribute("Default", GridView3[0, 2].Text)
@@ -309,28 +311,28 @@ Public Sub readOutListGredView() As XmlElement[] ''Output Funtion for save as Xm
     t = New XmlElement
   Wend
   Return s
-  
+
 End
 
 Public Sub readOutImageGredView() As XmlElement[] ''Output Funtion for save as Xml
-  
+
   Dim s As XmlElement[]
   Dim hpic As New Picture
   Dim t As New XmlElement
-  
+
   If Not Exist(User.Home & "/Output") Then Mkdir User.home & "/Output"
   If Not Exist(User.home & "/Output/" & ModuleName) Then Mkdir User.home & "/Output/" & ModuleName
   s = New XmlElement[]
-  
+
   While GridView1.Rows.Count > 0
-    
+
     t.TagName = "Images"
     t.SetAttribute("IMGPath", GridView1[0, 0].Text)
     t.SetAttribute("X", GridView1[0, 2].Text)
     t.SetAttribute("Y", GridView1[0, 3].Text)
     t.SetAttribute("Resoulution", GridView1[0, 4].Text)
     t.SetAttribute("module", TextBox1.Text)
-    
+
     hpic = GridView1[0, 1].Picture
     hpic.Save(User.Home & "/Output/" & ModuleName & "/" & GridView1[0, 0].Text, 100)
     GridView1.Rows.Remove(0)
@@ -338,50 +340,50 @@ Public Sub readOutImageGredView() As XmlElement[] ''Output Funtion for save as X
     t = New XmlElement
   Wend
   Return s
-  
+
 End
 
 Public Sub TextBox1_KeyRelease() ''Set the ModuleName
-  
+
   ModuleName = TextBox1.text
-  
+
 End
 
 Public Sub Button3_Click()
-  
+
   If TextBox1.Text Then
     btn3_Click()
     loadModule(User.home & "/Output/" & ModuleName)
   Else
     Message.Info("Please Enter a Modulename")
   Endif
-  
+
 End
 
 Public Sub loadModule(pathtoModule As String) ''Edit a Exitst Module in /home/USER/Output (Load Function)
-  
+
   Dim s As XmlElement
-  
+
   Dim doc As New XmlDocument(pathtoModule & "/ModuleCall.xml")
-  
+
   For Each s In doc.GetElementsByTagName("Images")
     GridView1.Rows.Insert(0)
     GridView1[0, 0].Text = s.GetAttribute("IMGPath")
     GridView1[0, 1].Picture = Picture.Load(pathtoModule & "/" & s.GetAttribute("IMGPath"))
     GridView1[0, 2].Text = s.GetAttribute("X")
     GridView1[0, 3].Text = s.GetAttribute("Y")
-    
+
   Next
-  
+
   For Each s In doc.GetElementsByTagName("Text")
     GridView2.Rows.Insert(0)
     GridView2[0, 0].Text = s.GetAttribute("Description")
     GridView2[0, 1].Text = s.GetAttribute("X")
     GridView2[0, 2].Text = s.GetAttribute("Y")
     GridView2[0, 3].Text = s.GetAttribute("Font")
-    
+
   Next
-  
+
   For Each s In doc.GetElementsByTagName("List")
     GridView3.Rows.Insert(0)
     GridView3[0, 0].Text = s.GetAttribute("List")
@@ -390,18 +392,18 @@ Public Sub loadModule(pathtoModule As String) ''Edit a Exitst Module in /home/US
     GridView3[0, 3].Text = s.GetAttribute("x")
     GridView3[0, 4].Text = s.GetAttribute("y")
   Next
-  
+
 End
 
 Public Sub Button2_Click()
-  
+
   GridView1.Clear()
   GridView2.Clear()
   GridView3.Clear()
   GridView1.Rows.Count = 0
   GridView2.Rows.Count = 0
   GridView3.Rows.Count = 0
-  
+
   loadModule(User.home & "/Output/" & ModuleName)
   FScoarboardPreview.loadModule(User.home & "/Output/" & ModuleName)
 Catch
@@ -409,23 +411,23 @@ Catch
     Message.Error("Modul can't found")
   Endif
   Print Error.text
-  
+
 End
 
 Public Sub FontC_Click()
-  
+
   FFont.Show()
-  
+
 End
 
 Public Sub Form_Close()
-  
+
   FScoarboardPreview.Close()
-  
+
 End
 
 Public Sub Button1_Click() ''(WITHOUT SAVE THE CURREND MODULE) Install the Module from the Working Dir /home/USER/Output in /home/USER/.local/lib/scoreboard/module
-  
+
   If TextBox1.text
     Button3_Click()
     Shell "cp --recursive " & User.Home & "/Output/" & TextBox1.Text & " " & User.home & "/.local/lib/scoreboard/module/"
@@ -433,20 +435,20 @@ Public Sub Button1_Click() ''(WITHOUT SAVE THE CURREND MODULE) Install the Modul
   Else
     Message.Info("Please Enter a Modulename")
   Endif
-  
+
 End
 
 Public Sub GridView1_KeyPress()
-  
-  If Key.code = Key.Del Then 
+
+  If Key.code = Key.Del Then
     Try GridView1.Rows.Remove((GridView1.Current.y + 21) / 21 - 1)
   Endif
-  
+
 End
 
 Public Sub GridView2_KeyPress()
-  
-  If Key.code = Key.Del Then 
+
+  If Key.code = Key.Del Then
     Try GridView2.Rows.Remove((GridView2.Current.y + 21) / 21 - 1)
     If Error Then
       Print Error.Backtrace
@@ -455,16 +457,16 @@ Public Sub GridView2_KeyPress()
       Print Error.where
     Endif
   Endif
-  
+
 End
 
 Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault As Integer, TitelName As String) As Boolean
-  
+
   Dim s As String
   Dim workdir As String
   Dim List2 As String[]
   Dim a As String
-  
+
   btn3_Click()
   Button2_Click()
   If Not Exist(User.home & "/Output/" & ModuleName & "/" & TitelName) Then
@@ -472,14 +474,14 @@ Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault A
   Endif
   Workdir = User.Home & "/Output/" & ModuleName & "/" & TitelName
   List2 = New String[]
-  
+
   For Each s In List
-    
+
     Exec ["cp", s, workdir & "/" & File.name(s)]
     s = ModuleName & "/" & TitelName & "/" & File.Name(s)
     a = s & ";" & a
     List2.Add(s)
-    
+
   Next
   GridView3.Rows.Insert(0)
   GridView3[0, 0].Text = a
@@ -487,17 +489,17 @@ Public Sub InsertSelector(X As Integer, Y As Integer, List As String[], Dfault A
   GridView3[0, 2].Text = Dfault
   GridView3[0, 3].Text = X
   GridView3[0, 4].Text = Y
-  
+
   Return True
-  
+
 End
 
 Public Sub btn4_Click()
-  
-  Dim isert As FInsertList
-  
-  isert = New FInsertList(Me)
-  isert.x = 380
-  isert.y = 230
-  
+
+
+  Try FIn.Close()
+  FIn = New FInsertList(Panel1)
+
+
+
 End

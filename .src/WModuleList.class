@@ -3,18 +3,18 @@
 Public Data As String[]
 
 Public Sub setList(path As String)
-  
+
   Dim xml As XmlDocument
   Dim elements As XmlElement[]
   Dim e As XmlElement
   Dim i As Integer
   Dim d As String
-  
+
   xml = New XmlDocument(path)
   elements = xml.GetElementsByTagName("module")
   Data = New String[elements.Length, 3]
   i = 0
-  
+
   For Each e In elements
     Data[i, 0] = e.GetAttribute("url")
     Data[i, 1] = e.GetAttribute("Author")
@@ -22,7 +22,7 @@ Public Sub setList(path As String)
     i += 1
   Next
   For i = 0 To elements.Length - 1
-    
+
     Try TreeView1.Add(Data[i, 1] & Data[i, 2], Data[i, 2], Null, Data[i, 1])
     If Error Then
       TreeView1.Add(Data[i, 1], Data[i, 1])
@@ -30,28 +30,28 @@ Public Sub setList(path As String)
     Endif
   Next
   Me.Show
-  
+
 End
 
 Public Sub Wizard1_Cancel()
-  
+
   WModuleList.Close()
-  
+
 End
 
 Public Sub Wizard1_Close()
-  
+
   Dim Name As String
   Dim Author As String
-  
+
   Print "Hest"
   Name = Data[Data.Find(TreeView1.Current.Text) / 3, 2]
   Author = Data[Data.Find(TreeView1.Current.Text) / 3, 1]
-  
+
   Shell "wget -q -o /tmp/Scoreboard/module/module.tar.gz " & Data[Data.Find(TreeView1.Current.Text) / 3, 0] Wait
   Shell "tar -xzf /tmp/Scoreboard/module/module.tar.gz -C /tmp/Scoreboard/module" Wait
   Shell "mv /tmp/Scoreboard/module/" & Name & " " & User.home & "/.local/lib/scoreboard/module/" & Name Wait
   Message.Info("Modul was installed successfully.\n Error Code: 051-0002")
   WModuleList.Close()
-  
+
 End

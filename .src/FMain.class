@@ -1,65 +1,65 @@
 ' Gambas class file
 
 Public Sub Button1_Click()
-  
+
   FModule.Show()
-  
+
 End
 
 Public Sub mDir() ''Check Working Dirs for Existing and create if not Exist
-  
+
   If Not Exist(User.Home & "/.Scoreboard") Then Mkdir User.Home & "/.Scoreboard"
   FModule.Mdir()
-  
+
 End
 
 Public Sub Form_Open()
-  
+
   mDir()
-  
+
 End
 
 Public Sub Button2_Click()
-  
+
   FScoreboard.Show()
-  
+
 End
 
 Public Sub Button5_Click()
-  
+
   FimgSetting.Show()
-  
+
 End
 
 Public Sub Button3_Click() ''Open the Modul Editor
-  
+
   FScoarboardPreview.Show()
   FModuleEditor.Show()
   FScoarboardPreview.x = FModuleEditor.x + FModuleEditor.Width
-  
+
 End
 
 Public Sub getModul_Click() ''Future Function around getting External Modules
-  
+
   Select Message.Question("You will now be connected to bisam97.de and a list of modules for insterlation will be displayed", "cancel", "ok")
-    Case 1
+    Case 2
       MOnline.stat = True
       MOnline.Permision = True
       If MOnline.checkOnline() Then MOnline.stat = False
       MOnline.getModuleList()
     Default
   End Select
-  
+
 End
 
 Public Sub Button6_Click()
-  
+
   FKeysetting.Show()
-  
+
 End
 
 Public Sub Form_Close()
-  
+
   MOnline.clear()
-  
+
 End

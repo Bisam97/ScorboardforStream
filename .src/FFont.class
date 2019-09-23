@@ -1,7 +1,7 @@
 ' Gambas class file
 
 Public Sub Button1_Click()
-  
-  FModuleEditor.TxtFont.Text = FontChooser1.Value 
-  
+
+  FModuleEditor.TxtFont.Text = FontChooser1.Value
+
 End

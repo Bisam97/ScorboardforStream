@@ -3,65 +3,65 @@
 Static Public hPic As Picture
 
 Static Public Sub LoadIMages(Pic As Picture, x As Float, y As Float)
-  
+
   Paint.Begin(hPic)
   Paint.DrawPicture(Pic, x, y)
   Paint.End
-  
+
 End
 
 Public Sub loadModule(PathToModule As String) ''MODULE EDITOR FUNTCTION This Load the Modules with the Path to the ModuleCall.xml and Draw the information in the file
-  
+
   Dim s As XmlElement
-  
+
   Dim doc As New XmlDocument(pathtoModule & "/ModuleCall.xml")
   Dim StringSplit As String[]
-  
+
   StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
-  
+
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
   Paint.Begin(hPic)
   For Each s In doc.GetElementsByTagName("Images")
-    
+
     Paint.DrawPicture(Picture.Load(pathtoModule & "/" & s.GetAttribute("IMGPath")), CFloat(s.GetAttribute("X")), CFloat(s.GetAttribute("Y")))
-    
+
   Next
-  
+
   For Each s In doc.GetElementsByTagName("Text")
-    
+
     Paint.Font = Font[s.GetAttribute("Font")]
     Paint.Text(s.GetAttribute("Description"), CFloat(s.GetAttribute("X")), CFloat(s.GetAttribute("Y")), 1000, 100)
     Paint.Stroke()
   Next
   Paint.End()
-  
+
 End
 
 Public Sub Form_Open()
-  
+
   Dim StringSplit As String[]
   'Dim Image1 As Image
   'Dim Image2 As Image
-  
+
   StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|") 'Get the Image size by the Image Settings
-  
+
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
-  
+
   ScrollArea1.ResizeContents(hPic.w, hPic.h)
-  
-  ''---------v---- This is Playground Code 
-  
+
+  ''---------v---- This is Playground Code
+
   ' Paint.Begin(hPic)
-  ' 
+  '
   ' Paint.Brush = Paint.Color(Color.Cyan)
   ' Paint.LineWidth = 4
   ' Paint.DrawPicture(Picture.Load("Blue.png"), 55, 1715)
   ' Paint.DrawPicture(Picture.Load("red.png"), 2257, 60)
-  ' 
-  ' 
+  '
+  '
   ' ' Paint.Rectangle(58, 1718, 360, 320)
   ' ' Paint.Stroke()
-  ' ' 
+  ' '
   ' ' Paint.Brush = Paint.Color(Color.black)
   ' ' Paint.LineWidth = 10
   ' ' Paint.LineCap = Paint.LineCapRound
@@ -72,7 +72,7 @@ Public Sub Form_Open()
   ' ' Paint.RelLineTo(34, -64)
   ' ' Paint.RelLineTo(0, -20)
   ' ' Paint.Fill()
-  ' ' 
+  ' '
   ' ' Paint.Brush = Paint.Color(Color.Cyan)
   ' ' Paint.Rectangle(419, 1955, 1200, 85)
   ' ' Paint.Fill()
@@ -80,57 +80,57 @@ Public Sub Form_Open()
   ' ' Paint.LineWidth = 5
   ' ' Paint.Rectangle(424, 1958, 1198, 80)
   ' ' Paint.Stroke()
-  ' 
+  '
   ' Paint.Brush = Paint.Color(0)
   ' Paint.Font = Font["Tarrget 3D Italic,60"] ' 3D Italic
   ' Paint.Text("Bisam97", 595, 1955, 30, 30)
-  ' 
+  '
   ' Paint.Stroke()
-  ' 
+  '
   ' Paint.MoveTo(1500, 2000)
   ' Paint.Background = Color.Transparent
-  ' 
-  ' 
+  '
+  '
   ' Paint.Arc(1500, 2000, 32)
   ' Paint.Fill()
-  ' 
+  '
   ' Paint.Stroke()
   ' Paint.End
   ' ScrollArea1.Refresh()
   ' Message.Info("Fertig")
-  
+
 End
 
 Public Sub Button1_Click()
-  
+
   Dialog.Title = "Speichern"
   Dialog.Filter = ["*.png", "Bilder"]
   If Dialog.SaveFile() Then
   Else
     hPic.Save(Dialog.Path)
-    
+
   Endif
-  
+
 End
 
 Public Sub ScrollArea1_Draw() ''Re Draw the Picure if a Redraw Needed
-  
-  Paint.Translate(- ScrollArea1.ScrollX, - ScrollArea1.ScrollY)
+
+  Paint.Translate(-ScrollArea1.ScrollX, -ScrollArea1.ScrollY)
   Paint.DrawPicture(hPic, 0, 0)
-  
+
 End
 
 Public Sub makeFinishOverlay(pathToXml As String, pachToFinishOverlaySave As String) ''Make the Finish Overlay
-  
+
   Dim xml As XmlDocument
   Dim Element As XmlElement
   Dim StringSplit As String[]
-  
+
   xml = New XmlDocument(pathToXml)
-  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|") 
-  
+  StringSplit = Split(File.Load(User.home & "/.Scoreboard/img.conf"), "|")
+
   hPic = New Picture(CInt(StringSplit[0]), CInt(StringSplit[1]), True)
-  
+
   For Each Element In xml.GetElementsByTagName("Images", 0, -1)  'Its a XML Doc and this Split the Doc in Elements by Tags and draw the Images and the Text
     Paint.Begin(hpic)
     Paint.DrawPicture(Picture.Load(Element.GetAttribute("IMGPath")), CFloat(Element.GetAttribute("X")), CFloat(Element.GetAttribute("Y")))
@@ -146,5 +146,5 @@ Public Sub makeFinishOverlay(pathToXml As String, pachToFinishOverlaySave As Str
     Paint.End
   Next
   hpic.Save(pachToFinishOverlaySave, 100)
-  
+
 End
